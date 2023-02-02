@@ -11,6 +11,7 @@ $(function() {
                 success: (data) => {
                     console.log(data);
                     //$("#insertProducts").html(productRows);
+                    //comment
                 },
                 error: function (error) {
                     console.log(error);
