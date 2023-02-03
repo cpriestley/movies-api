@@ -167,4 +167,7 @@ html, body {
     }
 }
 
+.hot-card {
+    border: solid 0.5em green;
+}
 

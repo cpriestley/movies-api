@@ -206,7 +206,13 @@ $(function() {
         console.log(movieTitle);
         searchDb()
             .then((data) => { return data.filter((movie) => movie.Title.toLowerCase().includes(movieTitle.toLowerCase()))})
-            .then((movie) => {console.log(movie)});
+            .then((movie) => {
+                let target = $(`#${movie[0].id}`);
+                $(target).addClass("hot-card");
+                $(target).parent().remove();
+                $("#movie-content").prepend($(target).parent());
+                $(target).parent().parent().scrollLeft(0);
+            });
     });
 
 
