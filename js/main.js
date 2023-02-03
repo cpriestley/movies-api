@@ -185,6 +185,30 @@ $(function() {
     });
 
 
+    //search database
+    function searchDb() {
+        return $.ajax(
+            {
+                url: MOVIES_URL,
+                type: "GET",
+                dataType: "json",
+                success: (data) => {
+                    return data;
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+    }
+
+    $("#db-search-btn").click(function () {
+        let movieTitle = $("#search-input").val();
+        console.log(movieTitle);
+        searchDb()
+            .then((data) => { return data.filter((movie) => movie.Title.toLowerCase().includes(movieTitle.toLowerCase()))})
+            .then((movie) => {console.log(movie)});
+    });
+
 
     //search omdb
     let data = {
@@ -209,6 +233,4 @@ $(function() {
             }
         )
     }
-
-    searchMovie("goonies");
 });
