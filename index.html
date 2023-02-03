@@ -8,58 +8,152 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/jquery-3.6.3.js"></script>
 </head>
 <body>
 <header>
 
-</header>
-<main>
-
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-dark navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><i class="fa-solid fa-film"></i> MOVIE MOJO</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" >
+            <a class="navbar-brand fs-1" href="#"><i class="fa-solid fa-film"></i> MOVIE MOJO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
+                <ul class="navbar-nav d-flex flex-row justify-content-around w-100">
+                    <li class="nav-item w-30">
+                        <button type="button" class="btn btn-outline-success custom-btn" data-bs-toggle="modal" data-bs-target="#addModal">Add a Movie
+                        </button>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                    <li class="nav-item w-30">
+                        <select class="form-select">
+                            <option selected>Sort by</option>
+                            <option value="1">Rating Descending</option>
+                            <option value="2">Title Alphabetically</option>
+                            <option value="3">Genre</option>
+                        </select>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
+                    <li class="nav-item w-30">
+                        <div class="input-group d-flex justify-content-end" role="search">
+                            <input class="form-control" type="search" placeholder="Search for a movie" id="search-input">
+                            <button class="btn btn-outline-success custom-btn" id="db-search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+
             </div>
         </div>
     </nav>
+</header>
+<main>
+    <!-- Add a Movie Modal -->
+    <div class="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addLabel">Add a Movie</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search the OM Database to Autofill">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
 
 
+                    <form>
+                        <div class="form-group">
+                            <label for="addTitle">Title</label>
+                            <input type="text" class="form-control" id="addTitle" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="addImdbRating">IMDB Rating</label>
+                            <input type="text" class="form-control" id="addImdbRating" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="addGenre">Genres</label>
+                            <input type="text" class="form-control" id="addGenre" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="addPoster">Poster Link</label>
+                            <input type="text" class="form-control" id="addPoster" placeholder="">
+                        </div>
+                    </form>
 
 
-    <div class="container" id="movie-content">
-
-
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark" id="submitAdd">Submit New Movie</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Edit a Movie Modal -->
+    <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editLabel">Edit a Movie</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <form>
+                        <div class="form-group">
+                            <label for="editTitle">Title</label>
+                            <input type="text" class="form-control" id="editTitle" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="editImdbRating">IMDB Rating</label>
+                            <input type="text" class="form-control" id="editImdbRating" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="editGenre">Genres</label>
+                            <input type="text" class="form-control" id="editGenre" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPoster">Poster Link</label>
+                            <input type="text" class="form-control" id="editPoster" placeholder="">
+                        </div>
+                        <div class="form-group d-none">
+                            <label for="editId">ID</label>
+                            <input type="text" class="form-control" id="editId" placeholder="">
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark" id="submitEdit">Submit Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Banner-->
+    <img src="js/src/reelTop.jpeg" alt="top" width="100%" height="auto">
+
+    <!--Michael-->
+    <div class="container d-flex justify-content-center w-100" id="loading-image">
+        <img class="p-0 m-0" src="https://media.tenor.com/OxIKfikF9IsAAAAC/s%C3%B3observo-watchin-movie.gif" alt="popcorn">
+        <i class="fa fa-spinner"></i>
+    </div>
+
+    <!--Movie Carousel-->
+    <div class="parent">
+    <div class="child container-fluid w-80 mt-4">
+        <ul class="cards d-none" id="movie-content">
+
+        </ul>
+    </div>
+    </div>
+    <!--Banner-->
+    <img src="js/src/reelBottom.jpeg" alt="top" width="100%" height="auto">
 
 </main>
 <footer>
@@ -67,7 +161,9 @@
 </footer>
 </body>
 <script src="https://kit.fontawesome.com/88c8d6fd3b.js" crossorigin="anonymous"></script>
-<script src="js/jquery-3.6.3.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
