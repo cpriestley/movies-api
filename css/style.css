@@ -26,6 +26,26 @@
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
 }
 
+.parent{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.child{
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box; /* So the width will be 100% + 17px */
+}
+
+.btn-outline-success.custom-btn {
+    border-color: #E0D0B0;
+    color: #E0D0B0;
+}
+
 .preload * {
     -webkit-transition: none !important;
     -moz-transition: none !important;
@@ -40,16 +60,11 @@
 }
 
 .navbar {
-color: white;
+color: black;
 }
 
 html, body {
     background-color: black;
-    /*background-attachment: fixed;
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #000000));
-    background: -moz-linear-gradient(#333333, #000000);
-    background: -webkit-linear-gradient(#333333, #000000);
-    background: linear-gradient(#333333, #000000);*/
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -62,10 +77,9 @@ html, body {
     width: 840px;
     height: 614px;
 }
-/*
-#search-input {
-    min-width: 20em;
-    max-width: 20em;
+/*#search-input {
+    min-width: 15em;
+    max-width: 15em;
 }*/
 
 .card-img-top{
@@ -123,10 +137,10 @@ html, body {
     border-radius: 92px;
 }
 .cards::-webkit-scrollbar-thumb {
-    background: var(--darkred);
+    background: black;
 }
 .cards::-webkit-scrollbar-track {
-    background: var(--thumb);
+    background: black;
 }
 @media (min-width: 500px) {
     .card {

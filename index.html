@@ -20,15 +20,23 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav d-flex me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addModal">Add a Movie
+                <ul class="navbar-nav d-flex flex-row justify-content-around w-100">
+                    <li class="nav-item w-30">
+                        <button type="button" class="btn btn-outline-success custom-btn" data-bs-toggle="modal" data-bs-target="#addModal">Add a Movie
                         </button>
                     </li>
-                    <li class="nav-item">
-                        <div class="input-group d-flex w-50 justify-content-end" role="search">
+                    <li class="nav-item w-30">
+                        <select class="form-select">
+                            <option selected>Sort by</option>
+                            <option value="1">Rating Descending</option>
+                            <option value="2">Title Alphabetically</option>
+                            <option value="3">Genre</option>
+                        </select>
+                    </li>
+                    <li class="nav-item w-30">
+                        <div class="input-group d-flex justify-content-end" role="search">
                             <input class="form-control" type="search" placeholder="Search for a movie" id="search-input">
-                            <button class="btn btn-outline-success" id="db-search-btn">Search</button>
+                            <button class="btn btn-outline-success custom-btn" id="db-search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </li>
                 </ul>
@@ -137,10 +145,12 @@
     </div>
 
     <!--Movie Carousel-->
-    <div class="container-fluid w-80 mt-4">
+    <div class="parent">
+    <div class="child container-fluid w-80 mt-4">
         <ul class="cards d-none" id="movie-content">
 
         </ul>
+    </div>
     </div>
     <!--Banner-->
     <img src="js/src/reelBottom.jpeg" alt="top" width="100%" height="auto">
