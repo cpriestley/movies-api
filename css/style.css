@@ -99,8 +99,13 @@ html, body {
     flex: 0 0 100%;
     scroll-snap-align: start;
     height: 29em;
+    width: 15em;
     margin: 5px;
     background-color: #E0D0B0;
+}
+
+.card-body {
+    min-width: 210px;
 }
 .card .card-link-wrapper {
     margin-top: auto;
