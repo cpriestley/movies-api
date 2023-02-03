@@ -39,12 +39,17 @@
     box-sizing: border-box;
 }
 
+.navbar {
+color: white;
+}
+
 html, body {
-    background-attachment: fixed;
+    background-color: black;
+    /*background-attachment: fixed;
     background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #000000));
     background: -moz-linear-gradient(#333333, #000000);
     background: -webkit-linear-gradient(#333333, #000000);
-    background: linear-gradient(#333333, #000000);
+    background: linear-gradient(#333333, #000000);*/
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -52,3 +57,90 @@ html, body {
         scroll-behavior: smooth;
     }
 }
+
+#loading-image {
+    width: 840px;
+    height: 614px;
+}
+
+.card-img-top{
+    height: 300px;
+    width: auto;
+    border-radius: 25px;
+}
+
+.rating {
+    border-radius: 50%;
+    width: 47px;
+    height: 47px;
+    padding: 9px;
+    background: #000;
+    border: 3px solid #000;
+    color: #fff;
+    text-align: center;
+    font: 18px Arial, sans-serif;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+/*CUSTOM VARIABLES HERE*/
+.cards {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1em;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    height: 29em;
+    margin: 5px;
+    background-color: #E0D0B0;
+}
+.card .card-link-wrapper {
+    margin-top: auto;
+}
+.cards::-webkit-scrollbar {
+    height: 12px;
+}
+.cards::-webkit-scrollbar-thumb,
+.cards::-webkit-scrollbar-track {
+    border-radius: 92px;
+}
+.cards::-webkit-scrollbar-thumb {
+    background: var(--darkred);
+}
+.cards::-webkit-scrollbar-track {
+    background: var(--thumb);
+}
+@media (min-width: 500px) {
+    .card {
+        flex-basis: calc(50% - 10px);
+    }
+    .card:not(:last-child) {
+        margin-right: 20px;
+    }
+}
+@media (min-width: 700px) {
+    .card {
+        flex-basis: calc(calc(100% / 3) - 20px);
+    }
+    .card:not(:last-child) {
+        margin-right: 30px;
+    }
+}
+@media (min-width: 1100px) {
+    .card {
+        flex-basis: calc(25% - 30px);
+    }
+    .card:not(:last-child) {
+        margin-right: 40px;
+    }
+}
+
+
