@@ -7,12 +7,13 @@
     <!-- Bootstrap CSS only -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <header>
 
-    <nav class="navbar navbar-dark navbar-expand-lg bg-body-tertiary">
+    <nav class="d-none navbar navbar-dark navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand fs-1" href="#"><i class="fa-solid fa-film"></i> MOVIE MOJO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -20,28 +21,35 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav d-flex flex-row justify-content-around w-100">
-                    <li class="nav-item w-30">
-                        <button type="button" class="btn btn-outline-success custom-btn" data-bs-toggle="modal" data-bs-target="#addModal">Add a Movie
+                <ul class="navbar-nav d-flex me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-outline-warning custom-btn" data-bs-toggle="modal"
+                                data-bs-target="#addModal">Add a Movie
                         </button>
                     </li>
                     <li class="nav-item w-30">
-                        <select class="form-select">
-                            <option selected>Sort by</option>
-                            <option value="1">Rating Descending</option>
-                            <option value="2">Title Alphabetically</option>
-                            <option value="3">Genre</option>
-                        </select>
-                    </li>
-                    <li class="nav-item w-30">
-                        <div class="input-group d-flex justify-content-end" role="search">
-                            <input class="form-control" type="search" placeholder="Search for a movie" id="search-input">
-                            <button class="btn btn-outline-success custom-btn" id="db-search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <div class="ui-widget input-group d-flex justify-content-end" role="search">
+                            <input class="form-control" type="search" placeholder="Search for a movie"
+                                   id="search-input">
+                            <button class="btn btn-outline-warning custom-btn" id="db-search-btn">Search</button>
                         </div>
                     </li>
                 </ul>
 
             </div>
+        </div>
+    </nav>
+    <nav class="d-none navbar">
+        <div class="container">
+            <!-- No bacwards compatabilty yet: I'm a terrible person!-->
+            <ul class="menu-bar">
+                <li>Item</li>
+                <li>Item</li>
+                <li>Item</li>
+                <li>Item</li>
+                <li>Item</li>
+                <li>Item</li>
+            </ul>
         </div>
     </nav>
 </header>
@@ -56,13 +64,13 @@
                 </div>
                 <div class="modal-body">
 
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search the OM Database to Autofill">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <div class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search the OM Database to Autofill" id="OMDB-input">
+                        <button class="btn btn-outline-success" type="submit" id="searchOMDB">Search</button>
+                    </div>
 
 
-                    <form>
+                    <div>
                         <div class="form-group">
                             <label for="addTitle">Title</label>
                             <input type="text" class="form-control" id="addTitle" placeholder="">
@@ -79,7 +87,7 @@
                             <label for="addPoster">Poster Link</label>
                             <input type="text" class="form-control" id="addPoster" placeholder="">
                         </div>
-                    </form>
+                    </div>
 
 
                 </div>
@@ -136,24 +144,38 @@
     </div>
 
     <!--Banner-->
-    <img src="js/src/reelTop.jpeg" alt="top" width="100%" height="auto">
+    <div class="d-none ticker">
+        <div class="ticker__list">
+            <img src="media/reelTop.jpeg" alt="top" width="100%" height="auto">
+            <img src="media/reelBottom.jpeg" alt="top" width="100%" height="auto">
+            <img src="media/reelTop.jpeg" alt="top" width="100%" height="auto">
+            <img src="media/reelBottom.jpeg" alt="top" width="100%" height="auto">
+        </div>
+    </div>
 
     <!--Michael-->
-    <div class="container d-flex justify-content-center w-100" id="loading-image">
-        <img class="p-0 m-0" src="https://media.tenor.com/OxIKfikF9IsAAAAC/s%C3%B3observo-watchin-movie.gif" alt="popcorn">
-        <i class="fa fa-spinner"></i>
+    <div class="container d-flex justify-content-center vh-100 vw-100 min-vh-100 min-vw-100" id="loading-image">
+        <img class="p-0 m-0" src="https://media.tenor.com/OxIKfikF9IsAAAAC/s%C3%B3observo-watchin-movie.gif" alt="michael jackson eating popcorn">
     </div>
 
     <!--Movie Carousel-->
     <div class="parent">
-    <div class="child container-fluid w-80 mt-4">
-        <ul class="cards d-none" id="movie-content">
+        <div class="child container-fluid w-80 mt-4">
+            <ul class="cards d-none" id="movie-content">
 
-        </ul>
+            </ul>
+        </div>
     </div>
-    </div>
+
     <!--Banner-->
-    <img src="js/src/reelBottom.jpeg" alt="top" width="100%" height="auto">
+    <div class="d-none ticker">
+        <div class="ticker__list">
+            <img src="media/reelTop.jpeg" alt="top" width="100%" height="auto">
+            <img src="media/reelBottom.jpeg" alt="top" width="100%" height="auto">
+            <img src="media/reelTop.jpeg" alt="top" width="100%" height="auto">
+            <img src="media/reelBottom.jpeg" alt="top" width="100%" height="auto">
+        </div>
+    </div>
 
 </main>
 <footer>
@@ -163,6 +185,8 @@
 <script src="https://kit.fontawesome.com/88c8d6fd3b.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
         crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"

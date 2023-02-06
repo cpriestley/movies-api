@@ -1,16 +1,16 @@
 import {OMDB_API_KEY} from "./keys.js";
 
-$(function() {
-
-   /* $('#loading-image').bind('ajaxStart', function(){
-        $(this).show();
-    }).bind('ajaxStop', function(){
-        $(this).hide();
-    });*/
-
+$(function () {
 
     const MOVIES_URL = "https://fantastic-fortune-syrup.glitch.me/movies/";
     const OMDB_URL = "http://www.omdbapi.com/";
+
+    const movieContent = $("#movie-content");
+
+    let genres = new Set();
+    let fields = new Set();
+    let titles = new Set();
+    let omdbMovieResult;
 
     function getMovies() {
         $.ajax(
@@ -20,11 +20,15 @@ $(function() {
                 dataType: "json",
                 success: (data) => {
                     popCards(data);
-                    setTimeout( () => {
-                        $('#movie-content').removeClass("d-none");
-                        $('#loading-image').remove();
+                    setTimeout(() => {
+                        $(".navbar").removeClass("d-none");
+                        $(".ticker").removeClass("d-none");
+                        $("#movie-content").removeClass("d-none");
+                        $("#loading-image").remove();
                     }, 1200)
-
+                    console.log(genres);
+                    console.log(fields);
+                    $("#search-input").autocomplete({source: Array.from(titles)});
                     //$("#insertProducts").html(productRows);
                 },
                 error: function (error) {
@@ -34,29 +38,36 @@ $(function() {
         )
     }
 
-    getMovies();
-
-
-
-    function popCards(data) {
-        console.log(data);
+    function popCards(movies) {
         let card = '';
 
-        data.forEach(function (value) {
-            card += `<li className="card">`
-            card += `<div class="card pt-3" id="${value.id}">`;
-            card += `<img src="${value.Poster}" class="card-img-top" alt="${value.Title}">`;
-            card += `<div class="card-body">`;
-            card += `<h6 class="card-title fw-bold">${value.Title}</h6>`;
-            card += `<p class="card-text fs-6">${value.Genre}</p>`;
-            card += `<div class="d-flex flex-row justify-content-around w-80">
-            <p class="rating d-flex flex-row">${value.imdbRating}</p>
-            <button type="button" class="edit-btn btn btn-dark" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fa-solid fa-pencil"></i></button>
-            <button class="delete-btn btn btn-dark" type="submit"><i class="fa-solid fa-trash-can"></i></button>
-            </div>`;
-            card += `</div>`;
-            card += `</div>`;
-            card += `</li>`;
+        movies.forEach(function (movie) {
+            titles.add(movie.Title);
+            movie.Genre.split(', ').forEach(function (genre) {
+                genres.add(genre)
+            });
+            Object.keys(movie).forEach(function (field) {
+                fields.add(field)
+            });
+
+            card += `<li>
+                        <div class="card" id="${movie.id}">
+                            <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}">
+                            <div class="card-body">
+                                <h6 class="card-title fw-bold">${movie.Title}</h6>
+                                <p class="card-text fs-6">${movie.Genre}</p>
+                                <div class="d-flex flex-row justify-content-around w-80">
+                                    <p class="rating align-middle d-flex flex-row">${movie.imdbRating}</p>
+                                    <button type="button" class="edit-btn btn btn-dark" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <i class="fa-solid fa-pencil"></i>
+                                    </button>
+                                    <button class="delete-btn btn btn-dark" type="submit">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>`;
 
         });
 
@@ -64,15 +75,14 @@ $(function() {
 
     }
 
-
     //delete movies
-    $('#movie-content').on("click", "button.delete-btn", function(e) {
+    movieContent.on("click", "button.delete-btn", function () {
         let id = $(this).parent().parent().parent().attr('id');
         console.log(MOVIES_URL + "/" + id);
         $.ajax({
             url: MOVIES_URL + "/" + id,
             type: 'DELETE',
-            success: function() {
+            success: function () {
                 // Do something with the result
                 console.log("Movie deleted")
                 $('#' + id).parent().remove();
@@ -82,7 +92,7 @@ $(function() {
 
     //edit movies
     //open modal and prefill
-    $('#movie-content').on("click", "button.edit-btn", function(e) {
+    movieContent.on("click", "button.edit-btn", function (e) {
         let card = $(e.currentTarget).parent().parent().parent();
         //link
         let postLink = card.children('img').attr('src');
@@ -110,7 +120,7 @@ $(function() {
     });
 
 
-    $('#submitEdit').click(function() {
+    $('#submitEdit').click(function () {
         let title = document.getElementById("editTitle").value;
         let rating = document.getElementById("editImdbRating").value;
         let genre = document.getElementById("editGenre").value;
@@ -136,7 +146,7 @@ $(function() {
                 'Content-Type': 'application/json',
             },
             data: JSON.stringify(editMovie)
-        }).done(function(){
+        }).done(function () {
             console.log("Movie edited")
             getMovies();
             /*let element = $("#editLabel");
@@ -155,19 +165,26 @@ $(function() {
 
 
     //add a movie
-    $('#submitAdd').click(function() {
+    $('#submitAdd').click(function () {
         let title = document.getElementById("addTitle").value;
         let rating = document.getElementById("addImdbRating").value;
         let genre = document.getElementById("addGenre").value;
         let poster = document.getElementById("addPoster").value;
         console.log(title);
 
-        const newMovie = {
-            Title: title,
-            imdbRating: rating,
-            Genre: genre,
-            Poster: poster,
-        };
+        let newMovie;
+
+        if (toString.call(omdbMovieResult) === "[object Object]") {
+            newMovie = omdbMovieResult;
+        } else {
+            newMovie = {
+                Title: title,
+                imdbRating: rating,
+                Genre: genre,
+                Poster: poster,
+            };
+        }
+
         console.log(newMovie);
         $.ajax({
             url: MOVIES_URL,
@@ -176,14 +193,14 @@ $(function() {
                 'Content-Type': 'application/json',
             },
             data: JSON.stringify(newMovie)
-        }).done(function(){
-            console.log("Movie ADDED")
+        }).done(function () {
+            console.log(`${newMovie.Title} ADDED to database`)
+            omdbMovieResult = null;
             getMovies();
         });
 
 
     });
-
 
     //search database
     function searchDb() {
@@ -201,11 +218,23 @@ $(function() {
             })
     }
 
+    $("#searchOMDB").click(function () {
+        omdbMovieResult = searchMovie($("#OMDB-input").val())
+            .then(movie => {
+                $("#addTitle").val(movie.Title);
+                $("#addImdbRating").val(movie.imdbRating);
+                $("#addGenre").val(movie.Genre);
+                $("#addPoster").val(movie.Poster);
+            })
+    });
+
     $("#db-search-btn").click(function () {
         let movieTitle = $("#search-input").val();
         console.log(movieTitle);
         searchDb()
-            .then((data) => { return data.filter((movie) => movie.Title.toLowerCase().includes(movieTitle.toLowerCase()))})
+            .then((data) => {
+                return data.filter((movie) => movie.Title.toLowerCase().includes(movieTitle.toLowerCase()))
+            })
             .then((movie) => {
                 let target = $(`#${movie[0].id}`);
                 $(target).addClass("hot-card");
@@ -215,7 +244,6 @@ $(function() {
             });
     });
 
-
     //search omdb
     let data = {
         "i": "tt3896198",
@@ -224,14 +252,14 @@ $(function() {
 
     function searchMovie(movieTitle) {
         data.t = movieTitle;
-        $.ajax(
+        return $.ajax(
             {
                 url: OMDB_URL,
                 type: "GET",
                 data: data,
                 dataType: "json",
-                success: (data) => {
-                    console.log(data);
+                success: (movie) => {
+                    return movie;
                 },
                 error: function (error) {
                     console.log(error);
@@ -239,4 +267,7 @@ $(function() {
             }
         )
     }
+
+    getMovies();
+
 });
