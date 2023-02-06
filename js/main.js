@@ -33,41 +33,28 @@ $(function () {
     $("#rating-sort").click(sortByRating);
     $("#rebuild").click(rebuildMovieDatabase);
 
-    function sortByGenre() {
+    function sortBy(selector) {
         let lis = movieContent.children();
         console.log("movieContent Length: " + lis.length);
         lis.sort(function (a, b) {
-            return $(a).find(".card-text").text().localeCompare($(b).find(".card-text").text());
+            return $(a).find(selector).text().localeCompare($(b).find(selector).text());
         });
         $.each(movieContent.children(), function (idx, itm) {
             itm.remove();
         });
         $.each(lis, function(idx, itm) { movieContent.append(itm); });
+    }
+
+    function sortByGenre() {
+        sortBy(".card-text");
     }
 
     function sortByTitle() {
-        let lis = movieContent.children();
-        console.log("movieContent Length: " + lis.length);
-        lis.sort(function (a, b) {
-            return $(a).find(".card-title").text().localeCompare($(b).find(".card-title").text());
-        });
-        $.each(movieContent.children(), function (idx, itm) {
-            itm.remove();
-        });
-        $.each(lis, function(idx, itm) { movieContent.append(itm); });
+        sortBy(".card-title");
     }
 
     function sortByRating() {
-        let lis = movieContent.children();
-        console.log("movieContent Length: " + lis.length);
-        lis.sort(function (a, b) {
-            return $(a).find(".rating").text().localeCompare($(b).find(".rating").text());
-        });
-        $.each(movieContent.children(), function (idx, itm) {
-            itm.remove();
-        });
-        $.each(lis, function(idx, itm) { movieContent.append(itm); });
-
+        sortBy(".rating");
     }
 
     function popCards(movies) {
@@ -90,10 +77,10 @@ $(function () {
                                 <p class="card-text fs-6">${movie.Genre}</p>
                                 <div class="d-flex flex-row justify-content-around w-80">
                                     <p class="rating align-middle d-flex flex-row">${movie.imdbRating}</p>
-                                    <button type="button" class="edit-btn btn btn-dark" data-bs-toggle="modal" data-bs-target="#editModal">
+                                    <button type="button" class="edit-btn btn fs-5" data-bs-toggle="modal" data-bs-target="#editModal">
                                         <i class="fa-solid fa-pencil"></i>
                                     </button>
-                                    <button class="delete-btn btn btn-dark" type="submit">
+                                    <button class="delete-btn btn fs-5" type="submit">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </button>
                                 </div>
@@ -198,26 +185,36 @@ $(function () {
 
     //add a movie
     $('#submitAdd').click(function () {
-        let title = document.getElementById("addTitle").value;
-        let rating = document.getElementById("addImdbRating").value;
-        let genre = document.getElementById("addGenre").value;
-        let poster = document.getElementById("addPoster").value;
-        console.log(title);
+        let newMovie = {
+            Title: $("#addTitle").val(),
+            Year: $("#addYear").val(),
+            Rated: $("#addRated").val(),
+            Released:  convertMojoDatetoDate(("#addReleased").val()),
+            Runtime: $("#addRuntime").val(),
+            Genre: $("#addGenre").val(),
+            Director: $("#addDirector").val(),
+            Writer: $("#addWriter").val(),
+            Actors: $("#addActors").val(),
+            Plot: $("#addPlot").val(),
+            Language: $("#addLanguage").val(),
+            Country: $("#addCountry").val(),
+            Awards: $("#addAwards").val(),
+            Poster: $("#addPoster").val(),
+            Ratings: [{Source: "Internet Movie Database", Value: ""},
+                {Source: "Rotten Tomatoes", Value: ""},
+                {Source: "Metacritic", Value: $("#addMetascore").val() + "/100" }],    //converted
+            Metascore: $("#addMetascore").val(),
+            imdbRating: $("#addImdbRating").val(),
+            imdbVotes: $("#addImdbVotes").val(),
+            imdbID: $("#addImdbId").val(),
+            Type: $("#addType").val(),
+            DVD: $("#addDvdReleased").val(),
+            BoxOffice: $("#addBoxOffice").val(),
+            Production: $("#addProduction").val(),
+            Response: $("#addResponse").val(),
+            Website: $("#addWebsite").val(),
+        };
 
-        let newMovie;
-
-        if (toString.call(omdbMovieResult) === "[object Object]") {
-            newMovie = omdbMovieResult;
-        } else {
-            newMovie = {
-                Title: title,
-                imdbRating: rating,
-                Genre: genre,
-                Poster: poster,
-            };
-        }
-
-        console.log(newMovie);
         $.ajax({
             url: MOVIES_URL,
             type: 'POST',
@@ -227,7 +224,6 @@ $(function () {
             data: JSON.stringify(newMovie)
         }).done(function () {
             console.log(`${newMovie.Title} ADDED to database`)
-            omdbMovieResult = null;
             getMovies();
         });
 
@@ -250,13 +246,67 @@ $(function () {
             })
     }
 
+    function convertDateToMojoDate(date) {
+        let dateArray = date.split(" ");
+        let month = dateArray[1];
+        let day = dateArray[0];
+        let year = dateArray[2];
+        let newDate = month + " " + day + ", " + year;
+        return newDate;
+    }
+
+    function convertAbbrToMonth(abbr) {
+        let abbrs = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        return abbrs.indexOf(abbr) + 1;
+    }
+
+    function convertMonthToAbbr(m) {
+        return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][m - 1];
+    }
+
+    function convertMojoDatetoDate(input) {
+        let dateArray = input.split(" ");
+        return dateArray[2] + "-" + convertAbbrToMonth(dateArray[1]).toString().padStart(2, "0") + "-" + dateArray[0];
+    }
+
+    function convertDatetoMojoDate(date) {
+        return date.getDate().toString().padStart(2, "0") + " " + convertMonthToAbbr(date.getMonth()) + " " + date.getFullYear();
+    }
+
     $("#searchOMDB").click(function () {
         omdbMovieResult = searchMovie($("#OMDB-input").val())
             .then(movie => {
-                $("#addTitle").val(movie.Title);
-                $("#addImdbRating").val(movie.imdbRating);
-                $("#addGenre").val(movie.Genre);
-                $("#addPoster").val(movie.Poster);
+                $("#addTitle").val(movie.Title)
+                $("#addYear").val(movie.Year)
+                $("#addRated").val(movie.Rated)
+                $("#addReleased").val(convertMojoDatetoDate(movie.Released))
+                $("#addRuntime").val(movie.Runtime)
+                $("#addGenre").val(movie.Genre)
+                $("#addDirector").val(movie.Director)
+                $("#addWriter").val(movie.Writer)
+                $("#addActors").val(movie.Actors)
+                $("#addPlot").val(movie.Plot)
+                $("#addLanguage").val(movie.Language)
+                $("#addCountry").val(movie.Country)
+                $("#addAwards").val(movie.Awards)
+                $("#addPoster").val(movie.Poster)
+                $("#addRatings").val(movie.Ratings)
+                $("#addMetascore").val(movie.Metascore)
+                $("#addImdbId").val(movie.imdbID)
+                $("#addImdbRating").val(movie.imdbRating)
+                $("#addImdbVotes").val(movie.imdbVotes)
+                $("#addimdbID").val(movie.imdbID)
+                $("#addType").val(movie.Type)
+                $("#addDvdReleased").val(convertMojoDatetoDate(movie.DVD))
+                $("#addBoxOffice").val(movie.BoxOffice)
+                $("#addProduction").val(movie.Production)
+                $("#addResponse").val(movie.Response)
+                $("#addWebsite").val(movie.Website)
+
+                console.log( (new Date()).getMonth() );
+                console.log(convertDatetoMojoDate(new Date()));
+                console.log(convertMojoDatetoDate(movie.Released));
+                console.log(movie);
             })
     });
 
