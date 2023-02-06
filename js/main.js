@@ -223,6 +223,7 @@ $(function () {
             },
             data: JSON.stringify(newMovie)
         }).done(function () {
+            refreshAutoComplete();
             console.log(`${newMovie.Title} ADDED to database`)
             getMovies();
         });
@@ -255,6 +256,9 @@ $(function () {
     }
 
     function convertDateToMojoDate(date) {
+        if(date === "" || date === null || date === undefined) {
+            return "";
+        }
         let dateArray = date.split("-");
         let month =  convertMonthToAbbr(dateArray[1]);
         let day = dateArray[2].toString().padStart(2, "0");
@@ -263,6 +267,9 @@ $(function () {
     }
 
     function convertMojoDatetoDate(input) {
+        if(input === "" || input === null || input === undefined) {
+            return "";
+        }
         let dateArray = input.split(" ");
         return dateArray[2] + "-" + convertAbbrToMonth(dateArray[1]).toString().padStart(2, "0") + "-" + dateArray[0];
     }
@@ -390,6 +397,10 @@ $(function () {
         }, 1200)
         // console.log(genres);
         // console.log(fields);
+        refreshAutoComplete();
+    }
+
+    function refreshAutoComplete() {
         $("#search-input").autocomplete({source: Array.from(titles)});
     }
 
