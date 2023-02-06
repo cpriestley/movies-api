@@ -189,7 +189,7 @@ $(function () {
             Title: $("#addTitle").val(),
             Year: $("#addYear").val(),
             Rated: $("#addRated").val(),
-            Released:  convertDateToMojoDate(("#addReleased").val()),
+            Released:  convertDateToMojoDate($("#addReleased").val()),
             Runtime: $("#addRuntime").val(),
             Genre: $("#addGenre").val(),
             Director: $("#addDirector").val(),
@@ -200,9 +200,9 @@ $(function () {
             Country: $("#addCountry").val(),
             Awards: $("#addAwards").val(),
             Poster: $("#addPoster").val(),
-            Ratings: [{Source: "Internet Movie Database", Value: ""},
+            Ratings: [{Source: "Internet Movie Database", Value: $("#addImdbRating").val() + "/10"},
                 {Source: "Rotten Tomatoes", Value: ""},
-                {Source: "Metacritic", Value: $("#addMetascore").val() + "/100" }],    //converted
+                {Source: "Metacritic", Value: $("#addMetascore").val() + "/100" }],
             Metascore: $("#addMetascore").val(),
             imdbRating: $("#addImdbRating").val(),
             imdbVotes: $("#addImdbVotes").val(),
@@ -227,7 +227,6 @@ $(function () {
             getMovies();
         });
 
-
     });
 
     //search database
@@ -246,15 +245,6 @@ $(function () {
             })
     }
 
-    function convertDateToMojoDate(date) {
-        let dateArray = date.split(" ");
-        let month = dateArray[1];
-        let day = dateArray[0];
-        let year = dateArray[2];
-        let newDate = month + " " + day + ", " + year;
-        return newDate;
-    }
-
     function convertAbbrToMonth(abbr) {
         let abbrs = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         return abbrs.indexOf(abbr) + 1;
@@ -262,6 +252,14 @@ $(function () {
 
     function convertMonthToAbbr(m) {
         return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][m - 1];
+    }
+
+    function convertDateToMojoDate(date) {
+        let dateArray = date.split("-");
+        let month =  convertMonthToAbbr(dateArray[1]);
+        let day = dateArray[2].toString().padStart(2, "0");
+        let year = dateArray[0];
+        return day + " " + month + " " + year;
     }
 
     function convertMojoDatetoDate(input) {
@@ -302,11 +300,6 @@ $(function () {
                 $("#addProduction").val(movie.Production)
                 $("#addResponse").val(movie.Response)
                 $("#addWebsite").val(movie.Website)
-
-                console.log( (new Date()).getMonth() );
-                console.log(convertDatetoMojoDate(new Date()));
-                console.log(convertMojoDatetoDate(movie.Released));
-                console.log(movie);
             })
     });
 
