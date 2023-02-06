@@ -14,51 +14,47 @@
 <header>
 
     <nav class="d-none navbar navbar-dark navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand fs-1" href="#"><i class="fa-solid fa-film"></i> MOVIE MOJO</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="container-fluid d-flex justify-content-end">
+            <div>
+                <a class="navbar-brand fs-1" href="#movie-content"><i class="fa-solid fa-film"></i> MOVIE MOJO</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse">
+                <!-- No bacwards compatabilty yet: I'm a terrible person!-->
+                <ul class="menu-bar p-0 mb-0">
+                    <li data-bs-toggle="modal" data-bs-target="#addModal">Add Movie</li>
+                    <li id="genre-sort">Sort by Genre ASC</li>
+                    <li id="title-sort">Sort by Title ASC</li>
+                    <li id="rating-sort">Sort by Rating ASC</li>
+                    <li>Genres</li>
+                    <li id="rebuild">Rebuild Database</li>
+                </ul>
+            </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav d-flex me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto me-3 mb-2 mb-lg-0" style="min-width: 300px;">
                     <li class="nav-item">
-                        <button type="button" class="btn btn-outline-warning custom-btn" data-bs-toggle="modal"
-                                data-bs-target="#addModal">Add a Movie
-                        </button>
-                    </li>
-                    <li class="nav-item w-30">
-                        <div class="ui-widget input-group d-flex justify-content-end" role="search">
+                        <div class="ui-widget input-group" role="search">
                             <input class="form-control" type="search" placeholder="Search for a movie"
                                    id="search-input">
                             <button class="btn btn-outline-warning custom-btn" id="db-search-btn">Search</button>
                         </div>
                     </li>
                 </ul>
-
             </div>
         </div>
     </nav>
-    <nav class="d-none navbar">
-        <div class="container">
-            <!-- No bacwards compatabilty yet: I'm a terrible person!-->
-            <ul class="menu-bar">
-                <li>Item</li>
-                <li>Item</li>
-                <li>Item</li>
-                <li>Item</li>
-                <li>Item</li>
-                <li>Item</li>
-            </ul>
-        </div>
-    </nav>
+
 </header>
 <main>
     <!-- Add a Movie Modal -->
-    <div class="modal fade bg-mojo shadow-lg" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal fade shadow-lg" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-black text-mojo">
+                    <i class="fa-solid fa-film fs-1"></i>
                     <h5 class="modal-title text-mojo display-6" id="addLabel">Add a Movie</h5>
                     <button type="button" class="btn btn-outline-warning custom-btn" data-bs-dismiss="modal">
                         <i class="fa-solid fa-x"></i>
@@ -210,7 +206,7 @@
 
                 </div>
                 <div class="modal-footer bg-black">
-                    <button type="button" class="btn btn-outline-warning custom-btn" id="submitEdit">Submit Changes</button>
+                    <button type="button" class="btn btn-outline-warning custom-btn" id="submitAdd">Submit Changes</button>
                 </div>
             </div>
         </div>
@@ -218,10 +214,11 @@
 
 
     <!-- Edit a Movie Modal -->
-    <div class="modal fade bg-mojo shadow-lg" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal fade shadow-lg" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-black text-mojo">
+                    <i class="fa-solid fa-film fs-1"></i>
                     <h5 class="modal-title text-mojo display-6" id="editLabel">Edit a Movie</h5>
                     <button type="button" class="btn btn-outline-warning custom-btn" data-bs-dismiss="modal">
                         <i class="fa-solid fa-x"></i>

@@ -13,29 +13,61 @@ $(function () {
     let omdbMovieResult;
 
     function getMovies() {
-        $.ajax(
+        return $.ajax(
             {
                 url: MOVIES_URL,
                 type: "GET",
                 dataType: "json",
                 success: (data) => {
-                    popCards(data);
-                    setTimeout(() => {
-                        $(".navbar").removeClass("d-none");
-                        $(".ticker").removeClass("d-none");
-                        $("#movie-content").removeClass("d-none");
-                        $("#loading-image").remove();
-                    }, 1200)
-                    console.log(genres);
-                    console.log(fields);
-                    $("#search-input").autocomplete({source: Array.from(titles)});
-                    //$("#insertProducts").html(productRows);
+                    return data;
                 },
                 error: function (error) {
                     console.log(error);
                 }
             }
         )
+    }
+
+    $("#genre-sort").click(sortByGenre);
+    $("#title-sort").click(sortByTitle);
+    $("#rating-sort").click(sortByRating);
+    $("#rebuild").click(rebuildMovieDatabase);
+
+    function sortByGenre() {
+        let lis = movieContent.children();
+        console.log("movieContent Length: " + lis.length);
+        lis.sort(function (a, b) {
+            return $(a).find(".card-text").text().localeCompare($(b).find(".card-text").text());
+        });
+        $.each(movieContent.children(), function (idx, itm) {
+            itm.remove();
+        });
+        $.each(lis, function(idx, itm) { movieContent.append(itm); });
+    }
+
+    function sortByTitle() {
+        let lis = movieContent.children();
+        console.log("movieContent Length: " + lis.length);
+        lis.sort(function (a, b) {
+            return $(a).find(".card-title").text().localeCompare($(b).find(".card-title").text());
+        });
+        $.each(movieContent.children(), function (idx, itm) {
+            itm.remove();
+        });
+        $.each(lis, function(idx, itm) { movieContent.append(itm); });
+    }
+
+    function sortByRating() {
+        let lis = movieContent.children();
+        console.log("movieContent Length: " + lis.length);
+        lis.sort(function (a, b) {
+            return $(a).find(".rating").text().localeCompare($(b).find(".rating").text());
+        });
+        $.each(movieContent.children(), function (idx, itm) {
+            itm.remove();
+        });
+        $.each(lis, function(idx, itm) { movieContent.append(itm); });
+
     }
 
     function popCards(movies) {
@@ -53,7 +85,7 @@ $(function () {
             card += `<li>
                         <div class="card" id="${movie.id}">
                             <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}">
-                            <div class="card-body">
+                            <div class="card-body w-100">
                                 <h6 class="card-title fw-bold">${movie.Title}</h6>
                                 <p class="card-text fs-6">${movie.Genre}</p>
                                 <div class="d-flex flex-row justify-content-around w-80">
@@ -244,6 +276,8 @@ $(function () {
             });
     });
 
+
+
     //search omdb
     let data = {
         "i": "tt3896198",
@@ -268,6 +302,55 @@ $(function () {
         )
     }
 
-    getMovies();
+
+    // This will add 257 movies to the database
+    // { "movies": [] }
+    function rebuildMovieDatabase() {
+        fetch("/data/movie.json")
+            .then(response => response.json())
+            .then(response => {
+                    //response.movies.forEach(movie => { postMovie(movie)})
+                    for (let i = 10; i < response.movies.length; i++) {
+                        //if(movieNotInDatabase) {
+                            postMovie(response.movies[i]);
+                        //}
+                    }
+                }
+            );
+    }
+
+    function postMovie(movie) {
+        const url = 'https://fantastic-fortune-syrup.glitch.me/movies';
+
+        let options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movie),
+        };
+
+        fetch(url, options)
+            .then(response => response.json())
+            .then(movie => console.log(`${movie.Title} successfully posted`))
+            .catch(error => console.error(error));
+
+    }
+
+    function buildCarousel(movies) {
+        popCards(movies);
+        setTimeout(() => {
+            $(".navbar").removeClass("d-none");
+            $(".ticker").removeClass("d-none");
+            $("#movie-content").removeClass("d-none");
+            $("#loading-image").remove();
+        }, 1200)
+        // console.log(genres);
+        // console.log(fields);
+        $("#search-input").autocomplete({source: Array.from(titles)});
+    }
+
+    getMovies()
+        .then((movies) => { buildCarousel(movies) });
 
 });

@@ -29,13 +29,13 @@
 
 .parent{
     width: 100%;
-    height: 100%;
+    height: 520px;
     overflow: hidden;
 }
 
 .child{
     width: 100%;
-    height: 100%;
+    height: 540px;
     overflow-y: scroll;
     overflow-x: scroll;
     padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
@@ -127,6 +127,9 @@ html, body {
 
 .card-body {
     min-width: 210px;
+}
+.card-body > h6 {
+    min-height: 38px;
 }
 .card .card-link-wrapper {
     margin-top: auto;
