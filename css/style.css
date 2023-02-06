@@ -246,6 +246,14 @@ img.card-img-top {
     min-width: 916px;
 }
 
+.bg-mojo {
+    background-color: var(--bs-mojo);
+}
+
+.text-mojo {
+    color: var(--bs-mojo);
+}
+
 @keyframes ticker {
     100% {
         transform: translateX(-1832px); /*try changing this to -100vw*/
