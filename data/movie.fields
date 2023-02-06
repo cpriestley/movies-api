@@ -24,32 +24,3 @@ BoxOffice
 Production
 Response
 Website
-
-
-
-
-$("#editTitle").val(movie.Title);
-                $("#editYear").val(movie.Year);
-                $("#editRated").val(movie.Rated);
-                $("#editReleased").val(dateConversionFromStringToNums(movie.Released));
-                $("#editRuntime").val(movie.Runtime);
-                $("#editGenre").val(movie.Genre);
-                $("#editDirector").val(movie.Director);
-                $("#editWriter").val(movie.Writer);
-                $("#editActors").val(movie.Actors);
-                $("#editPlot").val(movie.Plot);
-                $("#editLanguage").val(movie.Language);
-                $("#editCountry").val(movie.Country);
-                $("#editAwards").val(movie.Awards);
-                $("#editPoster").val(movie.Poster);
-                //$("#editReleased").val(movie.Ratings);
-                $("#editMetascore").val(movie.Metascore);
-                $("#editImdbRating").val(movie.imdbRating);
-                $("#editImdbVotes").val(movie.imdbVotes);
-                $("#editImdbId").val(movie.imdbID);
-                $("#editType").val(movie.Type);
-                $("#editDvdReleased").val(dateConversionFromStringToNums(movie.DVD));
-                $("#editBoxOffice").val(movie.BoxOffice);
-                $("#editProduction").val(movie.Production);
-                $("#editResponse").val(movie.Response);
-                $("#editWebsite").val(movie.Website);
