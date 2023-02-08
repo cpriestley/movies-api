@@ -13,9 +13,9 @@
 <body>
 <header>
 
-    <nav class="d-none container mx-2 navbar navbar-dark navbar-expand-lg bg-body-tertiary">
-        <div class="d-flex justify-content-end">
-            <div>
+    <nav class="d-none navbar navbar-dark navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid d-flex justify-content-between">
+            <div class="container-fluid d-flex justify-content-between">
                 <a class="navbar-brand fs-1" href="#movie-content"><i class="fa-solid fa-film"></i> <span class="logo">MOVIE</span> MOJO</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent">
@@ -23,26 +23,30 @@
                 </button>
             </div>
             <div class="collapse navbar-collapse">
-                <!-- No bacwards compatabilty yet: I'm a terrible person!-->
-                <ul class="menu-bar p-0 mb-0 me-4">
-                    <li data-bs-toggle="modal" data-bs-target="#addModal">Add Movie</li>
-                    <li id="genre-sort">Sort by Genre ASC</li>
-                    <li id="title-sort">Sort by Title ASC</li>
-                    <li id="rating-sort">Sort by Rating ASC</li>
-                    <li>Genres</li>
-                    <li id="rebuild">Rebuild Database</li>
-                </ul>
+                <!-- No backwards compatabilty yet: I'm a terrible person!-->
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto me-3 mb-2 mb-lg-0" style="min-width: 300px;">
-                    <li class="nav-item">
-                        <div class="ui-widget input-group" role="search">
-                            <input class="form-control" type="search" placeholder="Search for a movie"
-                                   id="search-input">
-                            <button class="btn btn-outline-warning custom-btn" id="db-search-btn">Search</button>
-                        </div>
-                    </li>
-                </ul>
+                    <ul class="menu-bar p-0 mb-0 d-flex justify-content-around align-items-center w-100">
+                        <li data-bs-toggle="modal" data-bs-target="#addModal">Add Movie</li>
+                        <li id="rebuild">Rebuild Database</li>
+                      <!--  <li id="genre-sort">Sort by Genre ASC</li>
+                        <li id="title-sort">Sort by Title ASC</li>
+                        <li id="rating-sort">Sort by Rating ASC</li>-->
+                        <li style="min-width: 150px;">
+                            <select class="form-select ms-auto" id="select">
+                                <option selected>Sort By</option>
+                                <option value="1" id="genre-sort">Genre ASC</option>
+                                <option value="2" id="title-sort">Title ASC</option>
+                                <option value="3" id="rating-sort">Rating ASC</option>
+                            </select>
+                        </li>
+                        <li class="nav-item me-3 mb-2 mb-lg-0" style="min-width: 250px;">
+                            <div class="ui-widget input-group" role="search">
+                                <input class="form-control" type="search" placeholder="Search for a movie" id="search-input">
+                                <button class="btn btn-outline-warning custom-btn" id="db-search-btn">Search</button>
+                            </div>
+                        </li>
+                    </ul>
             </div>
         </div>
     </nav>

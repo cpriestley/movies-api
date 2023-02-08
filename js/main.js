@@ -47,9 +47,19 @@ $(function () {
     getMovie(3).then ((movie) =>
     console.log(movie));
 
-    $("#genre-sort").click(sortByGenre);
+    $("#select").change(function () {
+        if ($(this).val() == 1) {
+            sortByGenre();
+        } else if ($(this).val() == 2) {
+            sortByTitle();
+        } if ($(this).val() == 3) {
+            sortByRating();
+        }
+    });
+
+ /*   $("#genre-sort").click(sortByGenre);
     $("#title-sort").click(sortByTitle);
-    $("#rating-sort").click(sortByRating);
+    $("#rating-sort").click(sortByRating);*/
     $("#rebuild").click(rebuildMovieDatabase);
 
     function sortBy(selector) {
