@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <title>Movie API</title>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
-    <!-- Bootstrap CSS only -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+    <!-- Bootstrap CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <header>
 
     <nav class="d-none navbar navbar-dark navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid d-flex justify-content-end">
-            <div>
+        <div class="container-fluid d-flex justify-content-between">
+            <div class="container-fluid d-flex justify-content-between">
                 <a class="navbar-brand fs-1" href="#movie-content"><i class="fa-solid fa-film"></i> MOVIE MOJO</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent">
@@ -23,25 +24,30 @@
                 </button>
             </div>
             <div class="collapse navbar-collapse">
-                <!-- No bacwards compatabilty yet: I'm a terrible person!-->
-                <ul class="menu-bar p-0 mb-0">
-                    <li data-bs-toggle="modal" data-bs-target="#addModal">Add Movie</li>
-                    <li id="genre-sort">Sort by Genre ASC</li>
-                    <li id="title-sort">Sort by Title ASC</li>
-                    <li id="rating-sort">Sort by Rating ASC</li>
-                    <li>Genres</li>
-                    <li id="rebuild">Rebuild Database</li>
-                </ul>
+                <!-- No backwards compatabilty yet: I'm a terrible person!-->
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto me-3 mb-2 mb-lg-0" style="min-width: 300px;">
-                    <li class="nav-item">
-                        <div class="ui-widget input-group" role="search">
-                            <input class="form-control" type="search" placeholder="Search for a movie" id="search-input">
-                            <button class="btn btn-outline-warning custom-btn" id="db-search-btn">Search</button>
-                        </div>
-                    </li>
-                </ul>
+                    <ul class="menu-bar p-0 mb-0 d-flex justify-content-around align-items-center w-100">
+                        <li data-bs-toggle="modal" data-bs-target="#addModal">Add Movie</li>
+                        <li id="rebuild">Rebuild Database</li>
+                      <!--  <li id="genre-sort">Sort by Genre ASC</li>
+                        <li id="title-sort">Sort by Title ASC</li>
+                        <li id="rating-sort">Sort by Rating ASC</li>-->
+                        <li style="min-width: 150px;">
+                            <select class="form-select ms-auto" id="select">
+                                <option selected>Sort By</option>
+                                <option value="1" id="genre-sort">Genre ASC</option>
+                                <option value="2" id="title-sort">Title ASC</option>
+                                <option value="3" id="rating-sort">Rating ASC</option>
+                            </select>
+                        </li>
+                        <li class="nav-item me-3 mb-2 mb-lg-0" style="min-width: 250px;">
+                            <div class="ui-widget input-group" role="search">
+                                <input class="form-control" type="search" placeholder="Search for a movie" id="search-input">
+                                <button class="btn btn-outline-warning custom-btn" id="db-search-btn">Search</button>
+                            </div>
+                        </li>
+                    </ul>
             </div>
         </div>
     </nav>
@@ -415,10 +421,11 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
         crossorigin="anonymous"></script>
 
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+
 <script type="module" src="js/main.js"></script>
 </html>
