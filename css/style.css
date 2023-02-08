@@ -42,7 +42,7 @@
     box-sizing: content-box; /* So the width will be 100% + 17px */
 }
 
-.btn-outline-warning.custom-btn:hover {
+.btn-outline-warning.custom-btn:hover, .btn-outline-warning.custom-btn:focus, .btn-outline-warning.custom-btn:active, .btn-outline-warning.custom-btn.active {
     background-color: var(--bs-mojo) !important;
     color: #000000 !important;
 }
@@ -81,13 +81,23 @@ html, body {
     }
 }
 
+.logo {
+    color: goldenrod;
+}
+
 #loading-image {
     width: 840px;
     height: 614px;
 }
 
-.card-img-top{
-    height: 300px;
+img.card-img-top {
+    width: 100% !important;
+    min-width: 14.6em !important;
+    height: 21.6em !important;
+    min-height: 21.6em !important;
+    object-fit: cover; /*magic*/
+    top: 0 !important;
+    /*border: var(--bs-mojo) thin solid;*/
 }
 
 .rating {
@@ -96,12 +106,17 @@ html, body {
     height: 47px;
     padding: 9px;
     background: #000;
-    border: 3px solid #000;
+    border: 3px solid var(--bs-mojo);
     color: #fff;
     text-align: center;
     font: 18px Arial, sans-serif;
     font-weight: bold;
     margin-bottom: 0;
+    color: goldenrod;
+}
+
+.edit-btn i, .delete-btn i {
+    color: var(--bs-mojo);
 }
 
 /*CUSTOM VARIABLES HERE*/
@@ -122,12 +137,19 @@ html, body {
     height: 29em;
     width: 15em;
     margin: 5px;
-    background-color: var(--bs-mojo);
+    background-color: transparent;
+    /*background-color: var(--bs-mojo);*/
 }
 
 .card-body {
     min-width: 210px;
+    color: var(--bs-mojo);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 0;
 }
+
 .card-body > h6 {
     min-height: 38px;
 }
@@ -173,13 +195,7 @@ html, body {
 }
 
 .hot-card {
-    border: solid 0.5em white;
-}
-
-img.card-img-top {
-    min-width: 210px;
-    overflow: clip !important;
-    border: black thin solid;
+    border-right: solid medium goldenrod;
 }
 
 #movie-content {
@@ -261,4 +277,24 @@ img.card-img-top {
     100% {
         transform: translateX(-1832px); /*try changing this to -100vw*/
     }
+}
+
+.add-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2em;
+    margin: auto;
+}
+
+.ui-widget input, .modal-body input, .modal-body textarea, .modal-body select, .modal-body input:focus, .modal-body textarea:focus, .modal-body select:focus {
+    background-color: var(--bs-dark) !important;
+    color: yellow !important;
+}
+
+.ui-widget input:focus, .modal-body input:focus, .modal-body textarea:focus, .modal-body select:focus {
+    border: medium solid var(--bs-warning);
+}
+
+.modal label {
+    color: var(--bs-warning);
 }
