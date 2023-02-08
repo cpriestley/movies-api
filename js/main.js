@@ -92,8 +92,8 @@ $(function () {
                         <div class="card" id="${movie.id}">
                             <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}">
                             <div class="card-body w-100">
-                                <h6 class="card-title fw-bold">${movie.Title}</h6>
-                                <p class="card-text fs-6">${movie.Genre}</p>
+                                <!--<h6 class="card-title fw-bold">${movie.Title}</h6>-->
+                                <p class="card-text mb-0 fs-6">${movie.Genre}</p>
                                 <div class="d-flex flex-row justify-content-around w-80">
                                     <p class="rating align-middle d-flex flex-row">${movie.imdbRating}</p>
                                     <button type="button" class="edit-btn btn fs-5" data-bs-toggle="modal" data-bs-target="#editModal">
@@ -330,7 +330,8 @@ $(function () {
         }).done(function () {
             refreshAutoComplete();
             console.log(`${newMovie.Title} ADDED to database`)
-            getMovies();
+            getMovies()
+                .then((movies) => { buildCarousel(movies) });
         });
 
     });
@@ -379,35 +380,45 @@ $(function () {
         return dateArray[2] + "-" + convertAbbrToMonth(dateArray[1]).toString().padStart(2, "0") + "-" + dateArray[0];
     }
 
+    $("#close-add").click(function () {
+        let selector = "#addModal > div > div > div.modal-body.bg-black > div > div > div.mojo-notification.me-5";
+        $(selector).addClass("d-none");
+    });
+
+    // $("input").on("keyup", function (e) {   e.preventDefault(); });
+    // $("input").on("change", function (e) {   e.preventDefault(); });
+
     $("#searchOMDB").click(function () {
         omdbMovieResult = searchMovie($("#OMDB-input").val())
             .then(movie => {
                 $("#addTitle").val(movie.Title)
-                $("#addYear").val(movie.Year)
-                $("#addRated").val(movie.Rated)
-                $("#addReleased").val(convertMojoDatetoDate(movie.Released))
-                $("#addRuntime").val(movie.Runtime)
-                $("#addGenre").val(movie.Genre)
-                $("#addDirector").val(movie.Director)
-                $("#addWriter").val(movie.Writer)
-                $("#addActors").val(movie.Actors)
-                $("#addPlot").val(movie.Plot)
-                $("#addLanguage").val(movie.Language)
-                $("#addCountry").val(movie.Country)
-                $("#addAwards").val(movie.Awards)
-                $("#addPoster").val(movie.Poster)
-                $("#addRatings").val(movie.Ratings)
-                $("#addMetascore").val(movie.Metascore)
-                $("#addImdbId").val(movie.imdbID)
-                $("#addImdbRating").val(movie.imdbRating)
-                $("#addImdbVotes").val(movie.imdbVotes)
-                $("#addimdbID").val(movie.imdbID)
-                $("#addType").val(movie.Type)
-                $("#addDvdReleased").val(convertMojoDatetoDate(movie.DVD))
-                $("#addBoxOffice").val(movie.BoxOffice)
-                $("#addProduction").val(movie.Production)
-                $("#addResponse").val(movie.Response)
-                $("#addWebsite").val(movie.Website)
+                $("#addYear").val(movie.Year);
+                $("#addRated").val(movie.Rated);
+                $("#addReleased").val(convertMojoDatetoDate(movie.Released));
+                $("#addRuntime").val(movie.Runtime);
+                $("#addGenre").val(movie.Genre);
+                $("#addDirector").val(movie.Director);
+                $("#addWriter").val(movie.Writer);
+                $("#addActors").val(movie.Actors);
+                $("#addPlot").val(movie.Plot);
+                $("#addLanguage").val(movie.Language);
+                $("#addCountry").val(movie.Country);
+                $("#addAwards").val(movie.Awards);
+                $("#addPoster").val(movie.Poster);
+                $("#addRatings").val(movie.Ratings);
+                $("#addMetascore").val(movie.Metascore);
+                $("#addImdbId").val(movie.imdbID);
+                $("#addImdbRating").val(movie.imdbRating);
+                $("#addImdbVotes").val(movie.imdbVotes);
+                $("#addimdbID").val(movie.imdbID);
+                $("#addType").val(movie.Type);
+                $("#addDvdReleased").val(convertMojoDatetoDate(movie.DVD));
+                $("#addBoxOffice").val(movie.BoxOffice);
+                $("#addProduction").val(movie.Production);
+                $("#addResponse").val(movie.Response);
+                $("#addWebsite").val(movie.Website);
+
+                $(".mojo-notification").removeClass("d-none");
             })
     });
 
@@ -420,6 +431,7 @@ $(function () {
             })
             .then((movie) => {
                 let target = $(`#${movie[0].id}`);
+                $(".hot-card").removeClass("hot-card");
                 $(target).addClass("hot-card");
                 $(target).parent().remove();
                 $("#movie-content").prepend($(target).parent());

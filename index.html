@@ -13,10 +13,10 @@
 <body>
 <header>
 
-    <nav class="d-none navbar navbar-dark navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid d-flex justify-content-end">
+    <nav class="d-none container mx-2 navbar navbar-dark navbar-expand-lg bg-body-tertiary">
+        <div class="d-flex justify-content-end">
             <div>
-                <a class="navbar-brand fs-1" href="#movie-content"><i class="fa-solid fa-film"></i> MOVIE MOJO</a>
+                <a class="navbar-brand fs-1" href="#movie-content"><i class="fa-solid fa-film"></i> <span class="logo">MOVIE</span> MOJO</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent">
                     <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
             </div>
             <div class="collapse navbar-collapse">
                 <!-- No bacwards compatabilty yet: I'm a terrible person!-->
-                <ul class="menu-bar p-0 mb-0">
+                <ul class="menu-bar p-0 mb-0 me-4">
                     <li data-bs-toggle="modal" data-bs-target="#addModal">Add Movie</li>
                     <li id="genre-sort">Sort by Genre ASC</li>
                     <li id="title-sort">Sort by Title ASC</li>
@@ -37,7 +37,8 @@
                 <ul class="navbar-nav ms-auto me-3 mb-2 mb-lg-0" style="min-width: 300px;">
                     <li class="nav-item">
                         <div class="ui-widget input-group" role="search">
-                            <input class="form-control" type="search" placeholder="Search for a movie" id="search-input">
+                            <input class="form-control" type="search" placeholder="Search for a movie"
+                                   id="search-input">
                             <button class="btn btn-outline-warning custom-btn" id="db-search-btn">Search</button>
                         </div>
                     </li>
@@ -65,6 +66,7 @@
                         <input type="text" class="form-control lead" placeholder="" id="OMDB-input">
                         <label for="OMDB-input" class="form-label">Search the Online Movie Database to Autofill</label>
                         <button class="btn btn-outline-warning custom-btn mt-3" type="submit" id="searchOMDB">Search</button>
+                        <!--<p class="lead text-warning  fw-bolder d-inline-block mt-3">Movie Found In Database</p>-->
                     </div>
 
                     <hr class="text-mojo">
@@ -83,6 +85,7 @@
                         <!--Rated-->
                         <div class="form-floating mb-3">
                             <select class="form-select" id="addRated">
+                                <option value=""></option>
                                 <option value="G">G</option>
                                 <option value="PG">PG</option>
                                 <option value="PG-13">PG-13</option>
@@ -147,10 +150,10 @@
                             <input type="text" class="form-control" id="addPoster" placeholder="">
                             <label for="addPoster" class="form-label">Poster Link</label>
                         </div>
-                        <div class="form-floating mb-3">
+                        <!--<div class="form-floating mb-3">
                             <input type="file" class="form-control" id="addPosterFile" placeholder="">
                             <label for="addPosterFile" class="form-label">Poster Upload</label>
-                        </div>
+                        </div>-->
                         <!--Metascore-->
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="addMetascore" placeholder="">
@@ -205,6 +208,9 @@
 
                 </div>
                 <div class="modal-footer bg-black">
+                    <div class="mojo-notification me-5">
+                        <p class="d-none text-warning mt-3 text-decoration-underline"><span class="lead fw-bolder text-uppercase">Added to Database</span></p>
+                    </div>
                     <button type="button" class="btn btn-outline-warning custom-btn" id="submitAdd">Submit Changes</button>
                 </div>
             </div>
