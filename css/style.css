@@ -27,6 +27,10 @@
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
 }
 
+.form-select {
+    color: var(--bs-mojo);
+}
+
 .parent{
     width: 100%;
     height: 520px;
@@ -40,11 +44,6 @@
     overflow-x: scroll;
     padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
     box-sizing: content-box; /* So the width will be 100% + 17px */
-}
-
-.btn-outline-warning.custom-btn:hover, .btn-outline-warning.custom-btn:focus, .btn-outline-warning.custom-btn:active, .btn-outline-warning.custom-btn.active {
-    background-color: var(--bs-mojo) !important;
-    color: #000000 !important;
 }
 
 .btn-outline-warning.custom-btn {
@@ -107,7 +106,6 @@ img.card-img-top {
     padding: 9px;
     background: #000;
     border: 3px solid var(--bs-mojo);
-    color: #fff;
     text-align: center;
     font: 18px Arial, sans-serif;
     font-weight: bold;
@@ -195,7 +193,7 @@ img.card-img-top {
 }
 
 .hot-card {
-    border-right: solid medium goldenrod;
+    border: solid medium goldenrod;
 }
 
 #movie-content {
@@ -240,7 +238,7 @@ img.card-img-top {
 .menu-bar li:hover {
     color: black;
 }
-.menu-bar li:hover::before {
+.menu-bar li.menu-hover:hover::before {
     background: linear-gradient(to bottom, #e8edec, var(--bs-mojo));
     box-shadow: 0 3px 20px 0 black;
     transform: scale(1.2);
@@ -286,13 +284,31 @@ img.card-img-top {
     margin: auto;
 }
 
-.ui-widget input, .modal-body input, .modal-body textarea, .modal-body select, .modal-body input:focus, .modal-body textarea:focus, .modal-body select:focus {
+.ui-widget input, .modal-body input, .modal-body textarea, .modal-body select, .modal-body input:focus,
+.modal-body textarea:focus, .modal-body select:focus #db-search-btn:focus {
     background-color: var(--bs-dark) !important;
     color: yellow !important;
 }
 
-.ui-widget input:focus, .modal-body input:focus, .modal-body textarea:focus, .modal-body select:focus {
-    border: medium solid var(--bs-warning);
+.ui-widget input:focus, .modal-body input:focus, .modal-body textarea:focus,
+.modal-body select:focus, #select:focus {
+    border: thin solid var(--bs-warning) !important;
+}
+
+#db-search-btn:focus, #db-search-btn:active {
+    border: thin solid var(--bs-warning) !important;
+    background-color: var(--bs-mojo) !important;
+    color: #000000 !important;
+}
+
+.card:hover {
+    border: thin solid var(--bs-warning) !important;
+    box-shadow: var(--bs-warning) 0 0 20px 0px;
+}
+.btn-outline-warning.custom-btn:hover, .btn-outline-warning.custom-btn:focus, .btn-outline-warning.custom-btn:active, .btn-outline-warning.custom-btn.active {
+    border: thin solid var(--bs-warning) !important;
+    background-color: var(--bs-mojo) !important;
+    color: #000000 !important;
 }
 
 .modal label {

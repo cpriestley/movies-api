@@ -28,9 +28,38 @@ $(function () {
         )
     }
 
-    $("#genre-sort").click(sortByGenre);
+    function getMovie(id) {
+        return $.ajax(
+            {
+                url: MOVIES_URL + id,
+                type: "GET",
+                dataType: "json",
+                success: (data) => {
+                    return data;
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            }
+        )
+    }
+
+    getMovie(3).then ((movie) =>
+    console.log(movie));
+
+    $("#select").change(function () {
+        if ($(this).val() === 1) {
+            sortByGenre();
+        } else if ($(this).val() === 2) {
+            sortByTitle();
+        } if ($(this).val() === 3) {
+            sortByRating();
+        }
+    });
+
+ /*   $("#genre-sort").click(sortByGenre);
     $("#title-sort").click(sortByTitle);
-    $("#rating-sort").click(sortByRating);
+    $("#rating-sort").click(sortByRating);*/
     $("#rebuild").click(rebuildMovieDatabase);
 
     function sortBy(selector) {
@@ -70,10 +99,10 @@ $(function () {
             });
 
             card += `<li>
-                        <div class="card" id="${movie.id}">
+                        <div class="card my-3" id="${movie.id}">
                             <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}">
                             <div class="card-body w-100">
-                                <!--<h6 class="card-title fw-bold">${movie.Title}</h6>-->
+                                <h6 class="card-title fw-bold d-none">${movie.Title}</h6>
                                 <p class="card-text mb-0 fs-6">${movie.Genre}</p>
                                 <div class="d-flex flex-row justify-content-around w-80">
                                     <p class="rating align-middle d-flex flex-row">${movie.imdbRating}</p>
@@ -109,10 +138,24 @@ $(function () {
         });
     });
 
+    /*//date conversion from dd mmm yyyy to yyyy-mm-dd
+    function dateConversionFromStringToNums(string) {
+        let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        let date = string.split(" ");
+        console.log(date);
+        for (let j = 0; j < months.length; j++) {
+            if (date[1] === months[j]) {
+                date[1] = (j + 1).toString().padStart(2, "0");
+            }
+        }
+        return `${date[2]}-${date[1]}-${date[0]}`;
+    }
+        console.log(dateConversionFromStringToNums("11 Jan 2008"));*/
+
     //edit movies
     //open modal and prefill
     movieContent.on("click", "button.edit-btn", function (e) {
-        let card = $(e.currentTarget).parent().parent().parent();
+        /*let card = $(e.currentTarget).parent().parent().parent();
         //link
         let postLink = card.children('img').attr('src');
         $("#editPoster").val(postLink);
@@ -124,9 +167,39 @@ $(function () {
         $("#editGenre").val(genres);
         //rating
         let rating = card.children().first().next().children().first().next().next().children().first().text();
-        $("#editImdbRating").val(rating);
+        $("#editImdbRating").val(rating);*/
         let id = $(this).parent().parent().parent().attr('id');
         $("#editId").val(id);
+        getMovie(id)
+            .then ((movie) => {
+                $("#editTitle").val(movie.Title);
+                $("#editYear").val(movie.Year);
+                $("#editRated").val(movie.Rated);
+                $("#editReleased").val(convertMojoDatetoDate(movie.Released));
+                console.log(convertMojoDatetoDate(movie.Released));
+                $("#editRuntime").val(movie.Runtime);
+                $("#editGenre").val(movie.Genre);
+                $("#editDirector").val(movie.Director);
+                $("#editWriter").val(movie.Writer);
+                $("#editActors").val(movie.Actors);
+                $("#editPlot").val(movie.Plot);
+                $("#editLanguage").val(movie.Language);
+                $("#editCountry").val(movie.Country);
+                $("#editAwards").val(movie.Awards);
+                $("#editPoster").val(movie.Poster);
+                //$("#editReleased").val(movie.Ratings);
+                $("#editMetascore").val(movie.Metascore);
+                $("#editImdbRating").val(movie.imdbRating);
+                $("#editImdbVotes").val(movie.imdbVotes);
+                $("#editImdbId").val(movie.imdbID);
+                $("#editType").val(movie.Type);
+                $("#editDvdReleased").val(convertMojoDatetoDate(movie.DVD));
+                $("#editBoxOffice").val(movie.BoxOffice);
+                $("#editProduction").val(movie.Production);
+                $("#editResponse").val(movie.Response);
+                $("#editWebsite").val(movie.Website);
+                $("#editId").val(id);
+        });
 
     });
 
@@ -141,17 +214,58 @@ $(function () {
 
     $('#submitEdit').click(function () {
         let title = document.getElementById("editTitle").value;
-        let rating = document.getElementById("editImdbRating").value;
+        let year = document.getElementById("editYear").value;
+        let rated = document.getElementById("editRated").value;
+        let released = convertDateToMojoDate(document.getElementById("editReleased").value);
+        let runtime = document.getElementById("editRuntime").value;
         let genre = document.getElementById("editGenre").value;
+        let director = document.getElementById("editDirector").value;
+        let writer = document.getElementById("editWriter").value;
+        let actors = document.getElementById("editActors").value;
+        let plot = document.getElementById("editPlot").value;
+        let language = document.getElementById("editLanguage").value;
+        let country = document.getElementById("editCountry").value;
+        let awards = document.getElementById("editAwards").value;
         let poster = document.getElementById("editPoster").value;
+        //Ratings
+        let metascore = document.getElementById("editMetascore").value;
+        let rating = document.getElementById("editImdbRating").value;
+        let imdbVotes = document.getElementById("editImdbVotes").value;
+        let imdbID = document.getElementById("editImdbId").value;
+        let type = document.getElementById("editType").value;
+        let dvd = convertDateToMojoDate(document.getElementById("editDvdReleased").value);
+        let boxOffice = document.getElementById("editBoxOffice").value;
+        let production = document.getElementById("editProduction").value;
+        let response = document.getElementById("editResponse").value;
+        let website = document.getElementById("editWebsite").value;
         let id = document.getElementById("editId").value;
-        console.log(title);
 
         const editMovie = {
             Title: title,
-            imdbRating: rating,
+            Year: year,
+            Rated: rated,
+            Released: released,
+            Runtime: runtime,
             Genre: genre,
+            Director: director,
+            Writer: writer,
+            Actors: actors,
+            Plot: plot,
+            Language: language,
+            Country: country,
+            Awards: awards,
             Poster: poster,
+            //Ratings: rating
+            Metascore: metascore,
+            imdbRating: rating,
+            imdbVotes: imdbVotes,
+            imdbID: imdbID,
+            Type: type,
+            DVD: dvd,
+            BoxOffice: boxOffice,
+            Production: production,
+            Response: response,
+            Website: website,
             id: id
         };
         console.log(editMovie);
@@ -168,7 +282,7 @@ $(function () {
         }).done(function () {
             console.log("Movie edited")
             getMovies()
-                .then((movies) => { buildCarousel(movies) });
+            .then ((movies) => {buildCarousel(movies)});
             /*let element = $("#editLabel");
             element.text(element.text().replace("Edit A Movie", "Movie Has Been Edited"));*/
         });
@@ -327,6 +441,7 @@ $(function () {
             })
             .then((movie) => {
                 let target = $(`#${movie[0].id}`);
+                $(".hot-card").removeClass("hot-card");
                 $(target).addClass("hot-card");
                 $(target).parent().remove();
                 $("#movie-content").prepend($(target).parent());
