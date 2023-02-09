@@ -48,11 +48,11 @@ $(function () {
     console.log(movie));
 
     $("#select").change(function () {
-        if ($(this).val() == 1) {
+        if ($(this).val() === 1) {
             sortByGenre();
-        } else if ($(this).val() == 2) {
+        } else if ($(this).val() === 2) {
             sortByTitle();
-        } if ($(this).val() == 3) {
+        } if ($(this).val() === 3) {
             sortByRating();
         }
     });
@@ -99,7 +99,7 @@ $(function () {
             });
 
             card += `<li>
-                        <div class="card" id="${movie.id}">
+                        <div class="card my-3" id="${movie.id}">
                             <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}">
                             <div class="card-body w-100">
                                 <h6 class="card-title fw-bold d-none">${movie.Title}</h6>
