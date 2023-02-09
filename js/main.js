@@ -479,7 +479,7 @@ $(function () {
     // This will add 257 movies to the database
     // { "movies": [] }
     function rebuildMovieDatabase() {
-        fetch("/data/movie.json")
+        fetch("/data/movies.json")
             .then(response => response.json())
             .then(response => {
                     //response.movies.forEach(movie => { postMovie(movie)})
