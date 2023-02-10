@@ -113,6 +113,15 @@ img.card-img-top {
     color: goldenrod;
 }
 
+.edit-btn > i:hover, .delete-btn > i:hover {
+    color: var(--bs-warning);
+    transform: scale(1.5);
+}
+
+.edit-btn > i, .delete-btn > i {
+    transition: transform 0.2s;
+}
+
 .edit-btn i, .delete-btn i {
     color: var(--bs-mojo);
 

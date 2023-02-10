@@ -110,7 +110,7 @@ $(function () {
                             <div class="card-body w-100">
                                 <h6 class="card-title fw-bold d-none">${movie.Title}</h6>
                                 <p class="card-text mb-0 fs-6">${movie.Genre}</p>
-                                <div class="d-flex flex-row justify-content-around w-80">
+                                <div class="d-flex flex-row justify-content-around w-80 pb-2 mt-1">
                                     <p class="rating align-middle d-flex flex-row">${movie.imdbRating}</p>
                                     <button type="button" class="edit-btn btn fs-5" data-bs-toggle="modal" data-bs-target="#editModal">
                                         <i class="fa-solid fa-pencil"></i>
