@@ -413,21 +413,33 @@ $(function () {
 
     $("#db-search-btn").on("click", function () {
         let movieTitle = $("#search-input").val();
-        console.log(movieTitle);
-        searchDb()
-            .then((data) => {
-                return data.filter((movie) => movie.Title.toLowerCase().includes(movieTitle.toLowerCase()))
-            })
-            .then((movie) => {
-                let target = $(`#${movie[0].id}`);
-                $(".hot-card").removeClass("hot-card");
-                $(target).addClass("hot-card");
-                $(target).parent().remove();
-                $("#movie-content").prepend($(target).parent());
-                $(target).parent().parent().scrollLeft(0);
-            });
+        let target = findMovie(movieTitle)
+        if (target !== null) {
+            highLightMovie(target, movieTitle)
+        } else {
+            $("#movie-not-found").show();
+        }
     });
 
+    $("#movie-not-found button").on("click", function () {
+        $("#movie-not-found").hide();
+    });
+
+    function findMovie(movieTitle) {
+        let target = $(".card-title").filter((idx, element) =>
+            $(element).text().toLowerCase().includes(movieTitle.toLowerCase()));
+        return target.length > 0 ? target[0] : null;
+    }
+
+    function highLightMovie(target, movieTitle) {
+        console.log(`found ${movieTitle}`);
+        target = $(target).parent().parent();
+        $(".hot-card").removeClass("hot-card");
+        $(target).addClass("hot-card");
+        $(target).parent().remove();
+        $("#movie-content").prepend($(target).parent());
+        $(target).parent().parent().scrollLeft(0).behavior = "smooth";
+    }
 
 
     //search omdb
