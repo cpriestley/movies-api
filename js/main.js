@@ -104,7 +104,7 @@ $(function () {
 
             card += `<li>
                         <div class="card my-3" id="${movie.id}">
-                            <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}">
+                            <img src="${movie.Poster}" loading="lazy" class="card-img-top" alt="${movie.Title}">
                             <div class="card-body w-100">
                                 <h6 class="card-title fw-bold d-none">${movie.Title}</h6>
                                 <p class="card-text mb-0 fs-6">${movie.Genre}</p>
