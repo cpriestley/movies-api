@@ -16,7 +16,8 @@
     <nav class="d-none navbar navbar-dark navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid d-flex justify-content-between">
             <div class="container-fluid d-flex justify-content-between">
-                <a class="navbar-brand fs-1" href="#movie-content"><i class="fa-solid fa-film"></i> <span class="logo">MOVIE</span> MOJO</a>
+                <a class="navbar-brand fs-1" href="#movie-content"><i class="fa-solid fa-film"></i> <span class="logo">MOVIE</span>
+                    MOJO</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent">
                     <span class="navbar-toggler-icon"></span>
@@ -26,27 +27,28 @@
                 <!-- No backwards compatabilty yet: I'm a terrible person!-->
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="menu-bar p-0 mb-0 d-flex justify-content-around align-items-center w-100">
-                        <li class="menu-hover" data-bs-toggle="modal" data-bs-target="#addModal">Add Movie</li>
-                        <li class="menu-hover" id="rebuild">Rebuild Database</li>
-                      <!--  <li id="genre-sort">Sort by Genre ASC</li>
-                        <li id="title-sort">Sort by Title ASC</li>
-                        <li id="rating-sort">Sort by Rating ASC</li>-->
-                        <li style="min-width: 150px;">
-                            <select class="form-select ms-auto bg-dark" id="select">
-                                <option selected>Sort By</option>
-                                <option value="1" id="genre-sort">Genre ASC</option>
-                                <option value="2" id="title-sort">Title ASC</option>
-                                <option value="3" id="rating-sort">Rating ASC</option>
-                            </select>
-                        </li>
-                        <li class="nav-item me-3 mb-2 mb-lg-0" style="min-width: 250px;">
-                            <div class="ui-widget input-group" role="search">
-                                <input class="form-control" type="search" placeholder="Search for a movie" id="search-input">
-                                <button class="btn btn-outline-warning custom-btn" id="db-search-btn">Search</button>
-                            </div>
-                        </li>
-                    </ul>
+                <ul class="menu-bar p-0 mb-0 d-flex justify-content-around align-items-center w-100">
+                    <li class="menu-hover" data-bs-toggle="modal" data-bs-target="#addModal">Add Movie</li>
+                    <li class="menu-hover" id="rebuild">Rebuild Database</li>
+                    <!--  <li id="genre-sort">Sort by Genre ASC</li>
+                      <li id="title-sort">Sort by Title ASC</li>
+                      <li id="rating-sort">Sort by Rating ASC</li>-->
+                    <li style="min-width: 150px;">
+                        <select class="form-select ms-auto bg-dark" id="select">
+                            <option selected>Sort By</option>
+                            <option value="1" id="genre-sort">Genre ASC</option>
+                            <option value="2" id="title-sort">Title ASC</option>
+                            <option value="3" id="rating-sort">Rating ASC</option>
+                        </select>
+                    </li>
+                    <li class="nav-item me-3 mb-2 mb-lg-0" style="min-width: 250px;">
+                        <div class="ui-widget input-group" role="search">
+                            <input class="form-control" type="search" placeholder="Search for a movie"
+                                   id="search-input">
+                            <button class="btn btn-outline-warning custom-btn" id="db-search-btn">Search</button>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -69,7 +71,8 @@
                     <div class="form-floating mb-3" role="search">
                         <input type="text" class="form-control lead" placeholder="" id="OMDB-input">
                         <label for="OMDB-input" class="form-label">Search the Online Movie Database to Autofill</label>
-                        <button class="btn btn-outline-warning custom-btn mt-3" type="submit" id="searchOMDB">Search</button>
+                        <button class="btn btn-outline-warning custom-btn mt-3" type="submit" id="searchOMDB">Search
+                        </button>
                         <!--<p class="lead text-warning  fw-bolder d-inline-block mt-3">Movie Found In Database</p>-->
                     </div>
 
@@ -213,14 +216,38 @@
                 </div>
                 <div class="modal-footer bg-black">
                     <div class="mojo-notification me-5">
-                        <p class="d-none text-warning mt-3 text-decoration-underline"><span class="lead fw-bolder text-uppercase">Added to Database</span></p>
+                        <p class="d-none text-warning mt-3 text-decoration-underline"><span
+                                class="lead fw-bolder text-uppercase">Added to Database</span></p>
                     </div>
-                    <button type="button" class="btn btn-outline-warning custom-btn" id="submitAdd">Submit Changes</button>
+                    <button type="button" class="btn btn-outline-warning custom-btn" id="submitAdd">Submit Changes
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Movie Not Found modal -->
+    <div class="modal" id="movie-not-found" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         style="border: thin solid var(--bs-warning);">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-black text-mojo">
+                    <i class="fa-solid fa-film fs-1"></i>
+                    <h5 class="modal-title text-mojo fs-3" id="movie-not-found-label">Movie Not Found</h5>
+                    <button type="button" class="btn btn-outline-warning custom-btn" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
+                </div>
+                <div class="modal-body bg-black">
+                    <p class="text-warning text-center mb-0">The movie you are looking for is not in the database.</p>
+                </div>
+                <div class="modal-footer bg-black">
+                    <button type="button" class="btn btn-outline-warning custom-btn" data-bs-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Edit a Movie Modal -->
     <div class="modal fade shadow-lg" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
@@ -376,7 +403,8 @@
 
                 </div>
                 <div class="modal-footer bg-black">
-                    <button type="button" class="btn btn-outline-warning custom-btn" id="submitEdit">Submit Changes</button>
+                    <button type="button" class="btn btn-outline-warning custom-btn" id="submitEdit">Submit Changes
+                    </button>
                 </div>
             </div>
         </div>
@@ -394,7 +422,8 @@
 
     <!--Michael-->
     <div class="container d-flex justify-content-center vh-100 vw-100 min-vh-100 min-vw-100" id="loading-image">
-        <img class="p-0 m-0" src="https://media.tenor.com/OxIKfikF9IsAAAAC/s%C3%B3observo-watchin-movie.gif" alt="michael jackson eating popcorn">
+        <img class="p-0 m-0" src="https://media.tenor.com/OxIKfikF9IsAAAAC/s%C3%B3observo-watchin-movie.gif"
+             alt="michael jackson eating popcorn">
     </div>
 
     <!--Movie Carousel-->
@@ -425,7 +454,8 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
         crossorigin="anonymous"></script>
 
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
+        integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"

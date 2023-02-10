@@ -75,7 +75,9 @@ $(function () {
         $.each(movieContent.children(), function (idx, itm) {
             itm.remove();
         });
-        $.each(lis, function(idx, itm) { movieContent.append(itm); });
+        $.each(lis, function (idx, itm) {
+            movieContent.append(itm);
+        });
     }
 
     function sortByGenre() {
@@ -175,7 +177,7 @@ $(function () {
         let id = $(this).parent().parent().parent().attr('id');
         $("#editId").val(id);
         getMovie(id)
-            .then ((movie) => {
+            .then((movie) => {
                 $("#editTitle").val(movie.Title);
                 $("#editYear").val(movie.Year);
                 $("#editRated").val(movie.Rated);
@@ -203,7 +205,7 @@ $(function () {
                 $("#editResponse").val(movie.Response);
                 $("#editWebsite").val(movie.Website);
                 $("#editId").val(id);
-        });
+            });
 
     });
 
@@ -286,7 +288,9 @@ $(function () {
         }).done(function () {
             console.log("Movie edited")
             getMovies()
-            .then ((movies) => {buildCarousel(movies)});
+                .then((movies) => {
+                    buildCarousel(movies)
+                });
             /*let element = $("#editLabel");
             element.text(element.text().replace("Edit A Movie", "Movie Has Been Edited"));*/
         });
@@ -308,7 +312,7 @@ $(function () {
             Title: $("#addTitle").val(),
             Year: $("#addYear").val(),
             Rated: $("#addRated").val(),
-            Released:  convertDateToMojoDate($("#addReleased").val()),
+            Released: convertDateToMojoDate($("#addReleased").val()),
             Runtime: $("#addRuntime").val(),
             Genre: $("#addGenre").val(),
             Director: $("#addDirector").val(),
@@ -321,7 +325,7 @@ $(function () {
             Poster: $("#addPoster").val(),
             Ratings: [{Source: "Internet Movie Database", Value: $("#addImdbRating").val() + "/10"},
                 {Source: "Rotten Tomatoes", Value: ""},
-                {Source: "Metacritic", Value: $("#addMetascore").val() + "/100" }],
+                {Source: "Metacritic", Value: $("#addMetascore").val() + "/100"}],
             Metascore: $("#addMetascore").val(),
             imdbRating: $("#addImdbRating").val(),
             imdbVotes: $("#addImdbVotes").val(),
@@ -345,7 +349,9 @@ $(function () {
             refreshAutoComplete();
             console.log(`${newMovie.Title} ADDED to database`)
             getMovies()
-                .then((movies) => { buildCarousel(movies) });
+                .then((movies) => {
+                    buildCarousel(movies)
+                });
         });
 
     });
@@ -376,18 +382,18 @@ $(function () {
     }
 
     function convertDateToMojoDate(date) {
-        if(date === "" || date === null || date === undefined) {
+        if (date === "" || date === null || date === undefined) {
             return "";
         }
         let dateArray = date.split("-");
-        let month =  convertMonthToAbbr(dateArray[1]);
+        let month = convertMonthToAbbr(dateArray[1]);
         let day = dateArray[2].toString().padStart(2, "0");
         let year = dateArray[0];
         return day + " " + month + " " + year;
     }
 
     function convertMojoDatetoDate(input) {
-        if(input === "" || input === null || input === undefined) {
+        if (input === "" || input === null || input === undefined) {
             return "";
         }
         let dateArray = input.split(" ");
@@ -399,41 +405,43 @@ $(function () {
         $(selector).addClass("d-none");
     });
 
-    // $("input").on("keyup", function (e) {   e.preventDefault(); });
-    // $("input").on("change", function (e) {   e.preventDefault(); });
+    $("#searchOMDB").on("click", function () {
+        let movieTitle = $("#OMDB-input").val();
+        if (findMovie(movieTitle) !== null) {
+            alert("Movie already in database");
+        } else {
+            omdbMovieResult = searchMovie(movieTitle)
+                .then(movie => {
+                    $("#addTitle").val(movie.Title)
+                    $("#addYear").val(movie.Year);
+                    $("#addRated").val(movie.Rated);
+                    $("#addReleased").val(convertMojoDatetoDate(movie.Released));
+                    $("#addRuntime").val(movie.Runtime);
+                    $("#addGenre").val(movie.Genre);
+                    $("#addDirector").val(movie.Director);
+                    $("#addWriter").val(movie.Writer);
+                    $("#addActors").val(movie.Actors);
+                    $("#addPlot").val(movie.Plot);
+                    $("#addLanguage").val(movie.Language);
+                    $("#addCountry").val(movie.Country);
+                    $("#addAwards").val(movie.Awards);
+                    $("#addPoster").val(movie.Poster);
+                    $("#addRatings").val(movie.Ratings);
+                    $("#addMetascore").val(movie.Metascore);
+                    $("#addImdbId").val(movie.imdbID);
+                    $("#addImdbRating").val(movie.imdbRating);
+                    $("#addImdbVotes").val(movie.imdbVotes);
+                    $("#addimdbID").val(movie.imdbID);
+                    $("#addType").val(movie.Type);
+                    $("#addDvdReleased").val(convertMojoDatetoDate(movie.DVD));
+                    $("#addBoxOffice").val(movie.BoxOffice);
+                    $("#addProduction").val(movie.Production);
+                    $("#addResponse").val(movie.Response);
+                    $("#addWebsite").val(movie.Website);
 
-    $("#searchOMDB").click(function () {
-        omdbMovieResult = searchMovie($("#OMDB-input").val())
-            .then(movie => {
-                $("#addTitle").val(movie.Title)
-                $("#addYear").val(movie.Year);
-                $("#addRated").val(movie.Rated);
-                $("#addReleased").val(convertMojoDatetoDate(movie.Released));
-                $("#addRuntime").val(movie.Runtime);
-                $("#addGenre").val(movie.Genre);
-                $("#addDirector").val(movie.Director);
-                $("#addWriter").val(movie.Writer);
-                $("#addActors").val(movie.Actors);
-                $("#addPlot").val(movie.Plot);
-                $("#addLanguage").val(movie.Language);
-                $("#addCountry").val(movie.Country);
-                $("#addAwards").val(movie.Awards);
-                $("#addPoster").val(movie.Poster);
-                $("#addRatings").val(movie.Ratings);
-                $("#addMetascore").val(movie.Metascore);
-                $("#addImdbId").val(movie.imdbID);
-                $("#addImdbRating").val(movie.imdbRating);
-                $("#addImdbVotes").val(movie.imdbVotes);
-                $("#addimdbID").val(movie.imdbID);
-                $("#addType").val(movie.Type);
-                $("#addDvdReleased").val(convertMojoDatetoDate(movie.DVD));
-                $("#addBoxOffice").val(movie.BoxOffice);
-                $("#addProduction").val(movie.Production);
-                $("#addResponse").val(movie.Response);
-                $("#addWebsite").val(movie.Website);
-
-                $(".mojo-notification").removeClass("d-none");
-            })
+                    $(".mojo-notification").removeClass("d-none");
+                })
+        }
     });
 
     $("#db-search-btn").click(function () {
@@ -517,8 +525,7 @@ $(function () {
 
         fetch(url, options)
             .then(response => response.json())
-            .then(movie => console.log(`${movie.Title} successfully posted`))
-            .catch(error => console.error(error));
+            .catch(error => console.error(`${movie.Title} was NOT posted\n${error}`));
 
     }
 
@@ -540,6 +547,8 @@ $(function () {
     }
 
     getMovies()
-        .then((movies) => { buildCarousel(movies) });
+        .then((movies) => {
+            buildCarousel(movies)
+        });
 
 });
