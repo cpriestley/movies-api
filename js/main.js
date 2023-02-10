@@ -52,11 +52,12 @@ $(function () {
     console.log(movie));
 
     $("#select").change(function () {
-        if ($(this).val() === 1) {
+        if ($(this).val() === "1") {
             sortByGenre();
-        } else if ($(this).val() === 2) {
+        } else if ($(this).val() === "2") {
             sortByTitle();
-        } if ($(this).val() === 3) {
+        }
+        if ($(this).val() === "3") {
             sortByRating();
         }
     });
