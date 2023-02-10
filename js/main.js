@@ -7,6 +7,10 @@ $(function () {
 
     const movieContent = $("#movie-content");
 
+    const problematicMovieAdditions = ["The Fifth Element", "Spider-Man 2", "The Birds", "The Inglorious Bastards",
+        "Lucky Number Slevin", "The Boondock Saints", "The Goonies", "Bicycle Thieves", "The Apartment",
+        "Come and See"];
+
     let genres = new Set();
     let fields = new Set();
     let titles = new Set();
@@ -475,17 +479,25 @@ $(function () {
         )
     }
 
-
     // This will add 257 movies to the database
-    // { "movies": [] }
+    // db.json needs to consist of an object with a "movies" field
+    // "movies" fields should contain an empty array []
+    // e.g. { "movies": [] }
     function rebuildMovieDatabase() {
+        problematicMovieAdditions.forEach(movie => {
+            searchMovie(movie)
+                .then(movie => {
+                    postMovie(movie);
+                })
+        });
+
         fetch("/data/movies.json")
             .then(response => response.json())
             .then(response => {
                     //response.movies.forEach(movie => { postMovie(movie)})
                     for (let i = 10; i < response.movies.length; i++) {
                         //if(movieNotInDatabase) {
-                            postMovie(response.movies[i]);
+                        postMovie(response.movies[i]);
                         //}
                     }
                 }
