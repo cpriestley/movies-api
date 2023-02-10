@@ -48,9 +48,6 @@ $(function () {
         )
     }
 
-    getMovie(3).then ((movie) =>
-    console.log(movie));
-
     $("#select").change(function () {
         if ($(this).val() === "1") {
             sortByGenre();
@@ -62,14 +59,10 @@ $(function () {
         }
     });
 
- /*   $("#genre-sort").click(sortByGenre);
-    $("#title-sort").click(sortByTitle);
-    $("#rating-sort").click(sortByRating);*/
-    $("#rebuild").click(rebuildMovieDatabase);
+    $("#rebuild").on("click", rebuildMovieDatabase);
 
     function sortBy(selector) {
         let lis = movieContent.children();
-        console.log("movieContent Length: " + lis.length);
         lis.sort(function (a, b) {
             return $(a).find(selector).text().localeCompare($(b).find(selector).text());
         });
@@ -145,36 +138,9 @@ $(function () {
         });
     });
 
-    /*//date conversion from dd mmm yyyy to yyyy-mm-dd
-    function dateConversionFromStringToNums(string) {
-        let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        let date = string.split(" ");
-        console.log(date);
-        for (let j = 0; j < months.length; j++) {
-            if (date[1] === months[j]) {
-                date[1] = (j + 1).toString().padStart(2, "0");
-            }
-        }
-        return `${date[2]}-${date[1]}-${date[0]}`;
-    }
-        console.log(dateConversionFromStringToNums("11 Jan 2008"));*/
-
     //edit movies
     //open modal and prefill
     movieContent.on("click", "button.edit-btn", function (e) {
-        /*let card = $(e.currentTarget).parent().parent().parent();
-        //link
-        let postLink = card.children('img').attr('src');
-        $("#editPoster").val(postLink);
-        //title
-        let title = card.children().first().next().children().first().text();
-        $("#editTitle").val(title);
-        //genres
-        let genres = card.children().first().next().children().first().next().text();
-        $("#editGenre").val(genres);
-        //rating
-        let rating = card.children().first().next().children().first().next().next().children().first().text();
-        $("#editImdbRating").val(rating);*/
         let id = $(this).parent().parent().parent().attr('id');
         $("#editId").val(id);
         getMovie(id)
@@ -219,7 +185,7 @@ $(function () {
     });
 
 
-    $('#submitEdit').click(function () {
+    $('#submitEdit').on("click", function () {
         let title = document.getElementById("editTitle").value;
         let year = document.getElementById("editYear").value;
         let rated = document.getElementById("editRated").value;
@@ -308,7 +274,7 @@ $(function () {
 
 
     //add a movie
-    $('#submitAdd').click(function () {
+    $('#submitAdd').on("click", function () {
         let newMovie = {
             Title: $("#addTitle").val(),
             Year: $("#addYear").val(),
@@ -401,7 +367,7 @@ $(function () {
         return dateArray[2] + "-" + convertAbbrToMonth(dateArray[1]).toString().padStart(2, "0") + "-" + dateArray[0];
     }
 
-    $("#close-add").click(function () {
+    $("#close-add").on("click", function () {
         let selector = "#addModal > div > div > div.modal-body.bg-black > div > div > div.mojo-notification.me-5";
         $(selector).addClass("d-none");
     });
@@ -445,7 +411,7 @@ $(function () {
         }
     });
 
-    $("#db-search-btn").click(function () {
+    $("#db-search-btn").on("click", function () {
         let movieTitle = $("#search-input").val();
         console.log(movieTitle);
         searchDb()
