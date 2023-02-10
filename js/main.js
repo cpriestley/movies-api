@@ -417,12 +417,12 @@ $(function () {
         if (target !== null) {
             highLightMovie(target, movieTitle)
         } else {
-            $("#movie-not-found").show();
+            $("#movie-not-found").modal("show");
         }
     });
 
     $("#movie-not-found button").on("click", function () {
-        $("#movie-not-found").hide();
+        $("#movie-not-found").modal("hide");
     });
 
     function findMovie(movieTitle) {
