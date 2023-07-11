@@ -43,7 +43,7 @@
                     </li>
                     <li class="nav-item me-3 mb-2 mb-lg-0" style="min-width: 250px;">
                         <div class="ui-widget input-group" role="search">
-                            <input class="form-control" type="search" placeholder="Search for a movie"
+                            <input autocomplete="off"  class="form-control" type="search" placeholder="Search for a movie"
                                    id="search-input">
                             <button class="btn btn-outline-warning custom-btn" id="db-search-btn">Search</button>
                         </div>
@@ -69,7 +69,7 @@
                 <div class="modal-body bg-black">
 
                     <div class="form-floating mb-3" role="search">
-                        <input type="text" class="form-control lead" placeholder="" id="OMDB-input">
+                        <input autocomplete="off"  type="text" class="form-control lead" id="OMDB-input">
                         <label for="OMDB-input" class="form-label">Search the Online Movie Database to Autofill</label>
                         <button class="btn btn-outline-warning custom-btn mt-3" type="submit" id="searchOMDB">Search
                         </button>
@@ -81,12 +81,12 @@
                     <form>
                         <!--Title-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addTitle" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addTitle" placeholder="">
                             <label for="addTitle" class="form-label">Title</label>
                         </div>
                         <!--Year-->
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control lead" id="addYear" placeholder="">
+                            <input autocomplete="off"  type="number" class="form-control lead" id="addYear" placeholder="">
                             <label for="addYear" class="form-label">Year</label>
                         </div>
                         <!--Rated-->
@@ -104,32 +104,32 @@
                         </div>
                         <!--Released-->
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control lead" id="addReleased" placeholder="">
+                            <input autocomplete="off"  type="date" class="form-control lead" id="addReleased" placeholder="">
                             <label for="addReleased" class="form-label">Release Date</label>
                         </div>
                         <!--Runtime-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addRuntime" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addRuntime" placeholder="">
                             <label for="addRuntime" class="form-label">Runtime</label>
                         </div>
                         <!--Genre-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addGenre" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addGenre" placeholder="">
                             <label for="addGenre" class="form-label">Genre</label>
                         </div>
                         <!--Director-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addDirector" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addDirector" placeholder="">
                             <label for="addDirector" class="form-label">Director</label>
                         </div>
                         <!--Writer-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addWriter" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addWriter" placeholder="">
                             <label for="addWriter" class="form-label">Writer</label>
                         </div>
                         <!--Actors-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addActors" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addActors" placeholder="">
                             <label for="addActors" class="form-label">Actors</label>
                         </div>
                         <!--Plot-->
@@ -139,76 +139,76 @@
                         </div>
                         <!--Language-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addLanguage" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addLanguage" placeholder="">
                             <label for="addLanguage" class="form-label">Language</label>
                         </div>
                         <!--Country-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addCountry" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addCountry" placeholder="">
                             <label for="addCountry" class="form-label">Country</label>
                         </div>
                         <!--Awards-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addAwards" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addAwards" placeholder="">
                             <label for="addAwards" class="form-label">Awards</label>
                         </div>
                         <!--Poster-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="addPoster" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control" id="addPoster" placeholder="">
                             <label for="addPoster" class="form-label">Poster Link</label>
                         </div>
                         <!--<div class="form-floating mb-3">
-                            <input type="file" class="form-control" id="addPosterFile" placeholder="">
+                            <input autocomplete="off"  type="file" class="form-control" id="addPosterFile" placeholder="">
                             <label for="addPosterFile" class="form-label">Poster Upload</label>
                         </div>-->
                         <!--Metascore-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="addMetascore" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control" id="addMetascore" placeholder="">
                             <label for="addMetascore" class="form-label">Metascore</label>
                         </div>
                         <!--imdbRating-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="addImdbRating" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control" id="addImdbRating" placeholder="">
                             <label for="addImdbRating" class="form-label">IMDB Rating</label>
                         </div>
                         <!--imdbVotes-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="addImdbVotes" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control" id="addImdbVotes" placeholder="">
                             <label for="addImdbVotes" class="form-label">IMDB Votes</label>
                         </div>
                         <!--imdbID-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="addImdbId" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control" id="addImdbId" placeholder="">
                             <label for="addImdbId" class="form-label">IMDB Id</label>
                         </div>
                         <!--Type-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="addType" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control" id="addType" placeholder="">
                             <label for="addType" class="form-label">Type</label>
                         </div>
                         <!--DVD-->
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control lead" id="addDvdReleased" placeholder="">
+                            <input autocomplete="off"  type="date" class="form-control lead" id="addDvdReleased" placeholder="">
                             <label for="addDvdReleased" class="form-label">DVD Release Date</label>
                         </div>
                         <!--BoxOffice-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addBoxOffice" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addBoxOffice" placeholder="">
                             <label for="addBoxOffice" class="form-label">Box Office</label>
                         </div>
                         <!--Production-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addProduction" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addProduction" placeholder="">
                             <label for="addProduction" class="form-label">Production</label>
                         </div>
                         <!--Response-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addResponse" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addResponse" placeholder="">
                             <label for="addResponse" class="form-label">Response</label>
                         </div>
                         <!--Website-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="addWebsite" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="addWebsite" placeholder="">
                             <label for="addWebsite" class="form-label">Website</label>
                         </div>
                     </form>
@@ -264,12 +264,12 @@
                     <form>
                         <!--Title-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editTitle" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editTitle" placeholder="">
                             <label for="editTitle" class="form-label">Title</label>
                         </div>
                         <!--Year-->
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control lead" id="editYear" placeholder="">
+                            <input autocomplete="off"  type="number" class="form-control lead" id="editYear" placeholder="">
                             <label for="editYear" class="form-label">Year</label>
                         </div>
                         <!--Rated-->
@@ -286,32 +286,32 @@
                         </div>
                         <!--Released-->
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control lead" id="editReleased" placeholder="">
+                            <input autocomplete="off"  type="date" class="form-control lead" id="editReleased" placeholder="">
                             <label for="editReleased" class="form-label">Release Date</label>
                         </div>
                         <!--Runtime-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editRuntime" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editRuntime" placeholder="">
                             <label for="editRuntime" class="form-label">Runtime</label>
                         </div>
                         <!--Genre-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editGenre" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editGenre" placeholder="">
                             <label for="editGenre" class="form-label">Genre</label>
                         </div>
                         <!--Director-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editDirector" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editDirector" placeholder="">
                             <label for="editDirector" class="form-label">Director</label>
                         </div>
                         <!--Writer-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editWriter" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editWriter" placeholder="">
                             <label for="editWriter" class="form-label">Writer</label>
                         </div>
                         <!--Actors-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editActors" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editActors" placeholder="">
                             <label for="editActors" class="form-label">Actors</label>
                         </div>
                         <!--Plot-->
@@ -321,81 +321,81 @@
                         </div>
                         <!--Language-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editLanguage" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editLanguage" placeholder="">
                             <label for="editLanguage" class="form-label">Language</label>
                         </div>
                         <!--Country-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editCountry" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editCountry" placeholder="">
                             <label for="editCountry" class="form-label">Country</label>
                         </div>
                         <!--Awards-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editAwards" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editAwards" placeholder="">
                             <label for="editAwards" class="form-label">Awards</label>
                         </div>
                         <!--Poster-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="editPoster" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control" id="editPoster" placeholder="">
                             <label for="editPoster" class="form-label">Poster Link</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="file" class="form-control" id="editPosterFile" placeholder="">
+                            <input autocomplete="off"  type="file" class="form-control" id="editPosterFile" placeholder="">
                             <label for="editPosterFile" class="form-label">Poster Upload</label>
                         </div>
                         <!--Metascore-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="editMetascore" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control" id="editMetascore" placeholder="">
                             <label for="editMetascore" class="form-label">Metascore</label>
                         </div>
                         <!--imdbRating-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="editImdbRating" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control" id="editImdbRating" placeholder="">
                             <label for="editImdbRating" class="form-label">IMDB Rating</label>
                         </div>
                         <!--imdbVotes-->
                         <div class="form-floating mb-3 d-none">
-                            <input type="number" class="form-control" id="editImdbVotes" placeholder="">
+                            <input autocomplete="off"  type="number" class="form-control" id="editImdbVotes" placeholder="">
                             <label for="editImdbVotes" class="form-label">IMDB Votes</label>
                         </div>
                         <!--imdbID-->
                         <div class="form-floating mb-3 d-none">
-                            <input type="text" class="form-control" id="editImdbId" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control" id="editImdbId" placeholder="">
                             <label for="editImdbId" class="form-label">IMDB Id</label>
                         </div>
                         <!--Type-->
                         <div class="form-floating mb-3 d-none">
-                            <input type="text" class="form-control" id="editType" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control" id="editType" placeholder="">
                             <label for="editType" class="form-label">Type</label>
                         </div>
                         <!--DVD-->
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control lead" id="editDvdReleased" placeholder="">
+                            <input autocomplete="off"  type="date" class="form-control lead" id="editDvdReleased" placeholder="">
                             <label for="editDvdReleased" class="form-label">DVD Release Date</label>
                         </div>
                         <!--BoxOffice-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editBoxOffice" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editBoxOffice" placeholder="">
                             <label for="editBoxOffice" class="form-label">Box Office</label>
                         </div>
                         <!--Production-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editProduction" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editProduction" placeholder="">
                             <label for="editProduction" class="form-label">Production</label>
                         </div>
                         <!--Response-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editResponse" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editResponse" placeholder="">
                             <label for="editResponse" class="form-label">Response</label>
                         </div>
                         <!--Website-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control lead" id="editWebsite" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editWebsite" placeholder="">
                             <label for="editWebsite" class="form-label">Website</label>
                         </div>
                         <!--ID-->
                         <div class="form-floating mb-3 d-none">
-                            <input type="text" class="form-control lead" id="editId" placeholder="">
+                            <input autocomplete="off"  type="text" class="form-control lead" id="editId" placeholder="">
                             <label for="editId" class="form-label">ID</label>
                         </div>
                     </form>

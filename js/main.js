@@ -98,6 +98,8 @@ $(function () {
                 fields.add(field)
             });
 
+            movie.Poster.replace("https://m.media-amazon.com/images/M/","media/posters/")
+
             card += `<li>
                         <div class="card my-3" id="${movie.id}">
                             <img src="${movie.Poster}" loading="lazy" class="card-img-top" alt="${movie.Title}">
